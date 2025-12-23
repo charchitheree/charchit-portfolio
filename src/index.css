@@ -156,4 +156,20 @@
   .bg-google-blue {
     background-color: hsl(var(--google-blue));
   }
+
+  .border-t-google-blue {
+    border-top-color: hsl(var(--google-blue));
+  }
+
+  .border-r-google-red {
+    border-right-color: hsl(var(--google-red));
+  }
+
+  .border-b-google-yellow {
+    border-bottom-color: hsl(var(--google-yellow));
+  }
+
+  .border-l-google-green {
+    border-left-color: hsl(var(--google-green));
+  }
 }
