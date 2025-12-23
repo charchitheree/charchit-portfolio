@@ -28,7 +28,7 @@ const Index = () => {
       <main className="flex-1 flex flex-col items-center justify-center px-4 pb-32">
         <div className="w-full max-w-2xl mx-auto text-center">
         <div className="mb-8">
-            <GoogleLogo name="Charchit" />
+            <GoogleLogo name="Charchit" animate />
             <p className="text-muted-foreground text-sm mt-2">Data Science Student • Campus Ambassador</p>
           </div>
           
