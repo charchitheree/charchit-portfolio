@@ -3,7 +3,7 @@ export interface PortfolioItem {
   title: string;
   url: string;
   description: string;
-  category: "project" | "skill" | "about" | "contact";
+  category: "project" | "skill" | "about" | "contact" | "experience" | "education";
   tags: string[];
   keywords: string[];
 }
@@ -11,77 +11,77 @@ export interface PortfolioItem {
 export const portfolioData: PortfolioItem[] = [
   {
     id: "about",
-    title: "About Me - Full Stack Developer",
-    url: "portfolio.dev/about",
+    title: "Charchit Sharma - Data Science Student & Campus Ambassador",
+    url: "charchit.dev/about",
     description:
-      "Passionate full-stack developer with 5+ years of experience building modern web applications. I love creating elegant solutions to complex problems and am always learning new technologies.",
+      "Pursuing BS in Data Science and Applications at IIT Madras, with a leadership development certification from Aspire Institute. Currently serving as Campus Ambassador at E-Cell IIT Roorkee, facilitating engagement for one of India's prominent entrepreneurship summits.",
     category: "about",
-    tags: ["Developer", "Creator", "Problem Solver"],
-    keywords: ["about", "me", "who", "developer", "experience", "background"],
+    tags: ["Data Science", "IIT Madras", "Campus Ambassador"],
+    keywords: ["about", "me", "who", "charchit", "sharma", "background", "student"],
   },
   {
-    id: "project-1",
-    title: "E-Commerce Platform - React & Node.js",
-    url: "portfolio.dev/projects/ecommerce",
+    id: "experience-ecell",
+    title: "Campus Ambassador - E-Cell IIT Roorkee",
+    url: "charchit.dev/experience/ecell",
     description:
-      "Built a full-featured e-commerce platform with React, Node.js, and PostgreSQL. Features include real-time inventory, payment processing, and admin dashboard.",
-    category: "project",
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    keywords: ["ecommerce", "shop", "store", "react", "node", "project"],
+      "Driving awareness and participation for one of India's leading entrepreneurship summits. Acting as the on-ground point of contact between E-Cell IIT Roorkee and student communities. Collecting feedback from Tier-2/3 students to make the summit more inclusive.",
+    category: "experience",
+    tags: ["E-Cell", "IIT Roorkee", "Leadership", "Outreach"],
+    keywords: ["experience", "work", "ecell", "ambassador", "roorkee", "entrepreneurship", "summit"],
   },
   {
-    id: "project-2",
-    title: "AI Chat Application - Next.js & OpenAI",
-    url: "portfolio.dev/projects/ai-chat",
+    id: "education-iitm",
+    title: "BS in Data Science - IIT Madras",
+    url: "charchit.dev/education/iitm",
     description:
-      "Developed an intelligent chat application using Next.js and OpenAI's GPT API. Features context-aware responses, conversation history, and real-time streaming.",
-    category: "project",
-    tags: ["Next.js", "OpenAI", "TypeScript", "Tailwind"],
-    keywords: ["ai", "chat", "gpt", "nextjs", "artificial intelligence", "project"],
+      "Bachelor of Science in Data Science and Applications at the Indian Institute of Technology, Madras (2024-2029). Applying structured, data-driven approaches to real-world problems and community engagement.",
+    category: "education",
+    tags: ["IIT Madras", "Data Science", "BS Degree"],
+    keywords: ["education", "degree", "iit", "madras", "data science", "college", "university"],
   },
   {
-    id: "project-3",
-    title: "Task Management Dashboard - Vue.js",
-    url: "portfolio.dev/projects/taskboard",
+    id: "education-aspire",
+    title: "Leadership Development Certificate - Aspire Institute",
+    url: "charchit.dev/education/aspire",
     description:
-      "Created a collaborative task management tool with Vue.js featuring drag-and-drop, real-time updates, team collaboration, and analytics dashboards.",
-    category: "project",
-    tags: ["Vue.js", "Firebase", "Vuetify", "Charts"],
-    keywords: ["task", "management", "dashboard", "vue", "project", "productivity"],
+      "Certificate in Leadership and Personal Development from Aspire Institute (May 2025 - July 2025). Focused on developing leadership skills and personal growth strategies.",
+    category: "education",
+    tags: ["Leadership", "Aspire Institute", "Certificate"],
+    keywords: ["certificate", "leadership", "aspire", "development", "personal growth"],
   },
   {
     id: "skills",
-    title: "Technical Skills & Expertise",
-    url: "portfolio.dev/skills",
+    title: "Skills & Expertise",
+    url: "charchit.dev/skills",
     description:
-      "Proficient in React, TypeScript, Node.js, Python, and cloud services (AWS, GCP). Experienced with databases (PostgreSQL, MongoDB), CI/CD, and agile methodologies.",
+      "Core competencies include Communication, Community Outreach, and Social Media Marketing. Experienced in data-driven approaches to outreach and engagement. Dedicated to fostering innovation and creating opportunities for students across India.",
     category: "skill",
-    tags: ["Frontend", "Backend", "DevOps", "Cloud"],
-    keywords: ["skills", "tech", "technologies", "stack", "programming", "languages"],
+    tags: ["Communication", "Community Outreach", "Social Media Marketing"],
+    keywords: ["skills", "expertise", "communication", "marketing", "outreach", "data"],
   },
   {
     id: "contact",
-    title: "Get In Touch - Let's Work Together",
-    url: "portfolio.dev/contact",
+    title: "Get In Touch - Let's Connect",
+    url: "charchit.dev/contact",
     description:
-      "Interested in collaborating or have a project in mind? I'm always open to discussing new opportunities. Reach out via email or connect on LinkedIn.",
+      "Interested in collaborating or discussing opportunities? Reach out via email at charxhitsharma@gmail.com or connect on LinkedIn. Based in Roorkee, Uttarakhand, India.",
     category: "contact",
-    tags: ["Email", "LinkedIn", "GitHub"],
-    keywords: ["contact", "email", "hire", "work", "collaborate", "reach"],
+    tags: ["Email", "LinkedIn", "Roorkee"],
+    keywords: ["contact", "email", "connect", "hire", "collaborate", "linkedin", "reach"],
   },
 ];
 
 export const searchSuggestions = [
-  "projects",
-  "react projects",
-  "about me",
+  "about charchit",
+  "data science",
+  "iit madras",
+  "e-cell roorkee",
   "skills",
   "contact",
   "experience",
-  "ai projects",
-  "frontend",
-  "backend",
-  "full stack",
+  "education",
+  "leadership",
+  "campus ambassador",
 ];
 
 export const filterPortfolioData = (query: string): PortfolioItem[] => {

@@ -1,6 +1,7 @@
 interface GoogleLogoProps {
   name?: string;
   size?: "sm" | "md" | "lg";
+  subtitle?: string;
 }
 
 const GoogleLogo = ({ name = "Portfolio", size = "lg" }: GoogleLogoProps) => {
