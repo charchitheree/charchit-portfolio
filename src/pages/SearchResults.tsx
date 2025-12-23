@@ -36,7 +36,7 @@ const SearchResults = () => {
       <header className="border-b border-border sticky top-0 bg-background z-10">
         <div className="flex items-center gap-6 px-6 py-4">
           <button onClick={handleLogoClick} className="flex-shrink-0">
-            <GoogleLogo name="Portfolio" size="sm" />
+            <GoogleLogo name="Charchit" size="sm" />
           </button>
           
           <div className="flex-1 max-w-xl">
@@ -68,13 +68,13 @@ const SearchResults = () => {
             All
           </button>
           <button className="pb-3 text-muted-foreground hover:text-foreground">
-            Projects
+            Experience
+          </button>
+          <button className="pb-3 text-muted-foreground hover:text-foreground">
+            Education
           </button>
           <button className="pb-3 text-muted-foreground hover:text-foreground">
             Skills
-          </button>
-          <button className="pb-3 text-muted-foreground hover:text-foreground">
-            About
           </button>
         </div>
       </header>
@@ -113,7 +113,7 @@ const SearchResults = () => {
       {/* Footer */}
       <footer className="border-t border-border mt-auto">
         <div className="px-6 py-4 text-sm text-muted-foreground">
-          <p>Built with React & TypeScript • Styled like Google</p>
+          <p>Charchit Sharma • BS Data Science @ IIT Madras</p>
         </div>
       </footer>
     </div>
