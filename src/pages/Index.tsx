@@ -54,7 +54,16 @@ const Index = () => {
         <div className="w-full max-w-2xl mx-auto text-center">
           <div className="mb-8">
             <GoogleLogo name="Charchit" animate />
-            <p className="text-muted-foreground text-sm mt-2">Data Science Student • Campus Ambassador</p>
+            <p 
+              className="text-muted-foreground text-sm mt-2 transition-all duration-500"
+              style={{
+                opacity: showContent ? 1 : 0,
+                transform: showContent ? 'translateY(0)' : 'translateY(10px)',
+                transitionDelay: '1.4s'
+              }}
+            >
+              Data Science Student • Campus Ambassador
+            </p>
           </div>
           
           <SearchBar
