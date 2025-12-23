@@ -19,7 +19,16 @@ const SearchResults = () => {
 
   useEffect(() => {
     setSearchQuery(initialQuery);
-    setResults(filterPortfolioData(initialQuery));
+    const filteredResults = filterPortfolioData(initialQuery);
+    setResults(filteredResults);
+    
+    // If no results and query exists, redirect to Google after 2 seconds
+    if (initialQuery && filteredResults.length === 0) {
+      const timer = setTimeout(() => {
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(initialQuery)}`, '_blank');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
   }, [initialQuery]);
 
   const handleSearch = () => {
@@ -90,9 +99,17 @@ const SearchResults = () => {
             <p className="text-lg text-foreground mb-2">
               No results found for "{searchQuery}"
             </p>
-            <p className="text-muted-foreground">
-              Try searching for "projects", "skills", or "about"
+            <p className="text-muted-foreground mb-6">
+              Redirecting to Google in 2 seconds...
             </p>
+            <a 
+              href={`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-google-blue text-primary-foreground rounded-md hover:opacity-90 transition-opacity"
+            >
+              Search on Google Now
+            </a>
           </div>
         ) : (
           <div>
