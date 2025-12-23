@@ -9,6 +9,7 @@ interface GoogleLogoProps {
 
 const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: GoogleLogoProps) => {
   const [visibleLetters, setVisibleLetters] = useState(animate ? 0 : name.length);
+  const [showCursor, setShowCursor] = useState(animate);
 
   const sizeClasses = {
     sm: "text-2xl",
@@ -42,6 +43,18 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
     return () => clearInterval(timer);
   }, [animate, letters.length]);
 
+  useEffect(() => {
+    if (!animate) return;
+    
+    // Hide cursor after animation completes + a delay
+    if (visibleLetters >= letters.length) {
+      const cursorTimer = setTimeout(() => {
+        setShowCursor(false);
+      }, 2000);
+      return () => clearTimeout(cursorTimer);
+    }
+  }, [animate, visibleLetters, letters.length]);
+
   return (
     <h1 className={`google-logo-text ${sizeClasses[size]} tracking-tight`}>
       {letters.map((letter, index) => (
@@ -56,6 +69,12 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
           {letter}
         </span>
       ))}
+      {showCursor && (
+        <span 
+          className="inline-block w-[3px] md:w-1 h-[0.8em] bg-google-blue ml-1 animate-pulse"
+          style={{ verticalAlign: 'baseline' }}
+        />
+      )}
     </h1>
   );
 };
