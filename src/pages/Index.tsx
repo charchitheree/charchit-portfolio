@@ -271,9 +271,10 @@ const Index = () => {
             <button
               onClick={() => { AudioEngine.click(); handleSearch(); }}
               onMouseEnter={() => AudioEngine.hover()}
-              className="retro-btn rounded hover:border-google-blue"
+              className="retro-btn rounded hover:border-google-blue relative overflow-hidden group"
             >
               Charchit Search
+              <span className="absolute inset-0 bg-google-blue/10 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </button>
             <button
               onClick={() => { AudioEngine.click(); handleLucky(); }}
