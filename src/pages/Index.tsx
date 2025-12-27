@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Mic, Camera, Grid3X3, Gamepad2, MessageCircle } from "lucide-react";
+import { Search, Mic, Camera, Grid3X3, MessageCircle } from "lucide-react";
 import GeminiChat from "@/components/GeminiChat";
 import SpaceBackground from "@/components/SpaceBackground";
 import { searchSuggestions } from "@/data/portfolioData";
@@ -84,7 +84,7 @@ const Index = () => {
 
   const handleLucky = () => {
     AudioEngine.success();
-    navigate("/doodle");
+    navigate("/dino");
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,33 +136,19 @@ const Index = () => {
 
       {/* Header */}
       <header className="flex justify-end items-center p-3 px-6 gap-4 backdrop-blur-sm bg-card/50 border-b border-border/30 relative z-10">
-        <a
-          href="https://github.com/charchitheree"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => AudioEngine.click()}
+        <button
+          onClick={() => { AudioEngine.click(); navigate('/dino'); }}
           onMouseEnter={() => AudioEngine.hover()}
           className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           GitHub
-        </a>
-        <a
-          href="https://www.instagram.com/heyimcharchit/"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => AudioEngine.click()}
+        </button>
+        <button
+          onClick={() => { AudioEngine.click(); navigate('/dino'); }}
           onMouseEnter={() => AudioEngine.hover()}
           className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           Instagram
-        </a>
-        <button
-          onClick={() => { AudioEngine.click(); navigate('/manga'); }}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="flex items-center gap-2 px-3 py-1.5 retro-btn rounded"
-        >
-          <Gamepad2 className="w-4 h-4" />
-          <span className="font-pixel text-[8px] hidden sm:inline">MANGA</span>
         </button>
         <button
           onClick={() => { AudioEngine.click(); navigate('/voices'); }}

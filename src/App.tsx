@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import SearchResults from "./pages/SearchResults";
 import WikipediaPage from "./pages/WikipediaPage";
 import MangaReader from "./pages/MangaReader";
-import DoodlePage from "./pages/DoodlePage";
+import DinoGame from "./pages/DinoGame";
 import FeedbackPage from "./pages/FeedbackPage";
 import NotFound from "./pages/NotFound";
 
@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/search" element={<SearchResults />} />
           <Route path="/wiki/charchit-sharma" element={<WikipediaPage />} />
           <Route path="/manga" element={<MangaReader />} />
-          <Route path="/doodle" element={<DoodlePage />} />
+          <Route path="/dino" element={<DinoGame />} />
           <Route path="/voices" element={<FeedbackPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
