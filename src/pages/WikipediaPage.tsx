@@ -134,7 +134,8 @@ const WikipediaPage = () => {
                         <span className="text-[#6b9eff]">November 8, 2004</span>
                         <span className="text-[#a8afb8]"> (age 21)</span>
                         <br />
-                        <span className="text-[#a8afb8]">Delhi, India</span>
+                        <span className="text-[#6b9eff]">Roorkee</span>
+                        <span className="text-[#a8afb8]">, Uttarakhand, India</span>
                       </td>
                     </tr>
                     <tr className="border-t border-[#3c4043]">
@@ -193,9 +194,9 @@ const WikipediaPage = () => {
               {/* Lead Paragraph - Humanized */}
               <p className="mb-4">
                 <strong className="font-semibold text-white">Charchit Sharma</strong> (born November 8, 2004) is an Indian student, 
-                software developer, and aspiring entrepreneur from Delhi. He is not your typical 21-year-old. While most people his age 
-                are figuring out what they want to do with their lives, Charchit has already embarked on a journey that blends 
-                technology, creativity, and an insatiable curiosity that refuses to be contained.
+                software developer, and aspiring entrepreneur from <span className="text-[#6b9eff]">Roorkee, Uttarakhand</span>. 
+                He is not your typical 21-year-old. While most people his age are figuring out what they want to do with their lives, 
+                Charchit has already embarked on a journey that blends technology, creativity, and an insatiable curiosity that refuses to be contained.
               </p>
 
               <p className="mb-4">
@@ -208,7 +209,7 @@ const WikipediaPage = () => {
 
               <p className="mb-6">
                 But behind every achievement lies a story. And Charchit's story isn't about smooth sailing. It's about stumbling, 
-                learning, and getting back up. It's about a boy from Delhi who dared to dream bigger than his circumstances allowed.
+                learning, and getting back up. It's about a boy from Roorkee who dared to dream bigger than his circumstances allowed.
               </p>
 
               {/* Early Life Section */}
@@ -218,10 +219,11 @@ const WikipediaPage = () => {
                 </h2>
                 
                 <p className="mb-4">
-                  Charchit Sharma was born on November 8, 2004, in <span className="text-[#6b9eff]">Delhi, India</span>. Growing up in one 
-                  of the world's most bustling cities, he was surrounded by chaos, noise, and a million distractions. Yet, from an 
-                  early age, something set him apart: an unusual stillness in his curiosity. While other kids his age were happy 
-                  with answers, Charchit always asked "why?" and then "what if?"
+                  Charchit Sharma was born on November 8, 2004, in <span className="text-[#6b9eff]">Roorkee</span>, a historic city 
+                  in <span className="text-[#6b9eff]">Uttarakhand, India</span>. Roorkee is home to IIT Roorkee, one of India's oldest 
+                  and most prestigious engineering institutions, founded in 1847. Growing up in this academic atmosphere, surrounded 
+                  by the foothills of the Himalayas and the legacy of engineering excellence, shaped his aspirations from an early age.
+                  While other kids his age were happy with answers, Charchit always asked "why?" and then "what if?"
                 </p>
 
                 <p className="mb-4">

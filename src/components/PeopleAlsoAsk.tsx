@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -8,20 +7,24 @@ import {
 
 const questions = [
   {
-    question: "What does Charchit Sharma study?",
-    answer: "Charchit Sharma is pursuing a BS in Data Science from the Indian Institute of Technology, Madras (IIT Madras). He is also an ALP Scholar at Harvard, focusing on advanced learning programs in technology and data science.",
+    question: "Who is Charchit Sharma?",
+    answer: "Charchit Sharma is a 21-year-old student, developer, and aspiring entrepreneur from Roorkee, Uttarakhand. He's pursuing BS in Data Science at IIT Madras and is a 2025 Aspire Leadership Program Scholar (Harvard faculty-backed). Known for his 'hunger to learn' and his journey of turning struggles into growth.",
   },
   {
-    question: "How old is Charchit Sharma?",
-    answer: "Charchit Sharma was born in 2004, making him approximately 21 years old as of 2025.",
+    question: "Where is Charchit from?",
+    answer: "Charchit is from Roorkee, a city in Uttarakhand, India. Roorkee is home to IIT Roorkee, one of India's oldest and most prestigious engineering institutions. Growing up in this academic atmosphere shaped his aspirations.",
   },
   {
-    question: "What is Charchit's Instagram handle?",
-    answer: "Charchit Sharma's Instagram handle is @heyimcharchit. You can find him at instagram.com/heyimcharchit where he has over 8,600 followers.",
+    question: "What is Charchit Sharma's date of birth?",
+    answer: "Charchit Sharma was born on November 8, 2004 (08/11/2004), making him 21 years old as of 2025.",
   },
   {
-    question: "What is Harvard ALP?",
-    answer: "Harvard ALP (Advanced Learning Program) is a prestigious scholarship program that selects outstanding students worldwide. Charchit is part of the 2025 cohort of ALP Scholars.",
+    question: "What is the Aspire Leadership Program?",
+    answer: "The Aspire Leadership Program (ALP) is a prestigious leadership initiative backed by Harvard University faculty. It selects exceptional young individuals worldwide who demonstrate academic excellence and potential to create meaningful impact. Charchit is part of the 2025 cohort.",
+  },
+  {
+    question: "What does Charchit study?",
+    answer: "Charchit is pursuing a Bachelor of Science in Data Science and Applications at the Indian Institute of Technology, Madras (IIT Madras). This is India's first and only online BS degree offered by an IIT.",
   },
 ];
 

@@ -3,85 +3,138 @@ export interface PortfolioItem {
   title: string;
   url: string;
   description: string;
-  category: "project" | "skill" | "about" | "contact" | "experience" | "education";
+  category: "project" | "skill" | "about" | "contact" | "experience" | "education" | "social" | "wikipedia";
   tags: string[];
   keywords: string[];
 }
 
 export const portfolioData: PortfolioItem[] = [
   {
+    id: "wikipedia",
+    title: "Charchit Sharma - Wikipedia",
+    url: "/wiki/charchit-sharma",
+    description:
+      "Read the full Wikipedia-style article about Charchit Sharma. Learn about his journey from Roorkee, Uttarakhand to IIT Madras, his struggles, achievements, and the hunger that drives him forward.",
+    category: "wikipedia",
+    tags: ["Wikipedia", "Biography", "Life Story"],
+    keywords: ["wikipedia", "wiki", "biography", "life", "story", "about", "charchit"],
+  },
+  {
     id: "about",
-    title: "Charchit Sharma - Data Science Student & Campus Ambassador",
+    title: "Charchit Sharma - The Builder from Roorkee",
     url: "charchit.dev/about",
     description:
-      "Pursuing BS in Data Science and Applications at IIT Madras, with a leadership development certification from Aspire Institute. Currently serving as Campus Ambassador at E-Cell IIT Roorkee, facilitating engagement for one of India's prominent entrepreneurship summits.",
+      "Born and raised in Roorkee, Uttarakhand, Charchit is a 21-year-old dreamer pursuing BS in Data Science at IIT Madras. Selected for the Aspire Leadership Program (Harvard faculty-backed), he's driven by an insatiable hunger to learn and build.",
     category: "about",
-    tags: ["Data Science", "IIT Madras", "Campus Ambassador"],
-    keywords: ["about", "me", "who", "charchit", "sharma", "background", "student"],
+    tags: ["Roorkee", "IIT Madras", "Harvard ALP", "Builder"],
+    keywords: ["about", "me", "who", "charchit", "sharma", "background", "student", "roorkee", "uttarakhand"],
   },
   {
     id: "experience-ecell",
-    title: "Campus Ambassador - E-Cell IIT Roorkee",
+    title: "Campus Ambassador - E-Summit IIT Roorkee",
     url: "charchit.dev/experience/ecell",
     description:
-      "Driving awareness and participation for one of India's leading entrepreneurship summits. Acting as the on-ground point of contact between E-Cell IIT Roorkee and student communities. Collecting feedback from Tier-2/3 students to make the summit more inclusive.",
+      "Representing his hometown's prestigious institution! As Campus Ambassador for E-Summit '26, Charchit bridges the gap between IIT Roorkee and student communities across India, making entrepreneurship accessible to Tier-2/3 cities.",
     category: "experience",
-    tags: ["E-Cell", "IIT Roorkee", "Leadership", "Outreach"],
-    keywords: ["experience", "work", "ecell", "ambassador", "roorkee", "entrepreneurship", "summit"],
+    tags: ["E-Summit", "IIT Roorkee", "Leadership", "Entrepreneurship"],
+    keywords: ["experience", "work", "ecell", "ambassador", "roorkee", "entrepreneurship", "summit", "esummit"],
   },
   {
     id: "education-iitm",
-    title: "BS in Data Science - IIT Madras",
+    title: "BS Data Science - IIT Madras (Pursuing)",
     url: "charchit.dev/education/iitm",
     description:
-      "Bachelor of Science in Data Science and Applications at the Indian Institute of Technology, Madras (2024-2029). Applying structured, data-driven approaches to real-world problems and community engagement.",
+      "Currently pursuing India's first online BS degree from an IIT. Charchit approaches learning unconventionally, preferring hands-on problem solving over passive lectures. Expected graduation: 2028.",
     category: "education",
     tags: ["IIT Madras", "Data Science", "BS Degree"],
-    keywords: ["education", "degree", "iit", "madras", "data science", "college", "university"],
+    keywords: ["education", "degree", "iit", "madras", "data science", "college", "university", "iitm"],
   },
   {
     id: "education-aspire",
-    title: "Leadership Development Certificate - Aspire Institute",
+    title: "Aspire Leadership Program - Harvard Faculty-backed",
     url: "charchit.dev/education/aspire",
     description:
-      "Certificate in Leadership and Personal Development from Aspire Institute (May 2025 - July 2025). Focused on developing leadership skills and personal growth strategies.",
+      "Selected as a 2025 ALP Scholar! The Aspire Leadership Program, backed by Harvard University faculty, identifies exceptional young leaders worldwide. This opened doors to a global network of ambitious peers and mentors.",
     category: "education",
-    tags: ["Leadership", "Aspire Institute", "Certificate"],
-    keywords: ["certificate", "leadership", "aspire", "development", "personal growth"],
+    tags: ["Harvard", "ALP", "Leadership", "Scholar"],
+    keywords: ["certificate", "leadership", "aspire", "development", "harvard", "alp", "scholar"],
   },
   {
     id: "skills",
-    title: "Skills & Expertise",
+    title: "Technical Skills & Expertise",
     url: "charchit.dev/skills",
     description:
-      "Core competencies include Communication, Community Outreach, and Social Media Marketing. Experienced in data-driven approaches to outreach and engagement. Dedicated to fostering innovation and creating opportunities for students across India.",
+      "Full-stack builder: React, Flutter, Python, Flask, SQL. AI-augmented developer who codes as a 'cyborg'. Passionate about Three.js, blockchain, and creating beautiful 8-bit retro aesthetics.",
     category: "skill",
-    tags: ["Communication", "Community Outreach", "Social Media Marketing"],
-    keywords: ["skills", "expertise", "communication", "marketing", "outreach", "data"],
+    tags: ["React", "Python", "AI", "Full-Stack", "Web3"],
+    keywords: ["skills", "expertise", "react", "python", "flask", "flutter", "coding", "developer"],
   },
   {
     id: "contact",
-    title: "Get In Touch - Let's Connect",
+    title: "Connect with Charchit",
     url: "charchit.dev/contact",
     description:
-      "Interested in collaborating or discussing opportunities? Reach out via email at charxhitsharma@gmail.com or connect on LinkedIn. Based in Roorkee, Uttarakhand, India.",
+      "Want to collaborate or just chat? Reach out at charxhitsharma@gmail.com. Based in Roorkee, Uttarakhand but building for the world.",
     category: "contact",
     tags: ["Email", "LinkedIn", "Roorkee"],
-    keywords: ["contact", "email", "connect", "hire", "collaborate", "linkedin", "reach"],
+    keywords: ["contact", "email", "connect", "hire", "collaborate", "reach", "message"],
+  },
+  {
+    id: "github",
+    title: "GitHub - @charchitheree",
+    url: "https://github.com/charchitheree",
+    description:
+      "Explore Charchit's code repositories, open-source contributions, and projects. From web apps to AI experiments.",
+    category: "social",
+    tags: ["GitHub", "Code", "Open Source"],
+    keywords: ["github", "code", "repository", "projects", "open source"],
+  },
+  {
+    id: "linkedin",
+    title: "LinkedIn - Charchit Sharma",
+    url: "https://www.linkedin.com/in/charchit-sharma-398165287/",
+    description:
+      "Professional profile featuring Charchit's journey, achievements, and thought leadership. Read his viral posts about struggles and growth.",
+    category: "social",
+    tags: ["LinkedIn", "Professional", "Network"],
+    keywords: ["linkedin", "professional", "network", "career", "posts"],
+  },
+  {
+    id: "instagram",
+    title: "Instagram - @heyimcharchit",
+    url: "https://www.instagram.com/heyimcharchit/",
+    description:
+      "Follow Charchit's journey through life, tech, and travel. 8,600+ followers. Bio: 'Just a bhondu.'",
+    category: "social",
+    tags: ["Instagram", "Photos", "Life"],
+    keywords: ["instagram", "photos", "social", "follow", "heyimcharchit"],
+  },
+  {
+    id: "twitter",
+    title: "X (Twitter) - @heyimcharchit",
+    url: "https://x.com/heyimcharchit",
+    description:
+      "Thoughts, tech insights, and random musings. Follow Charchit on X for real-time updates.",
+    category: "social",
+    tags: ["Twitter", "X", "Thoughts"],
+    keywords: ["twitter", "x", "tweets", "thoughts", "social"],
   },
 ];
 
 export const searchSuggestions = [
+  "charchit wikipedia",
+  "charchit sharma",
   "about charchit",
-  "data science",
+  "who is charchit",
   "iit madras",
-  "e-cell roorkee",
+  "roorkee",
+  "harvard alp",
+  "github",
+  "linkedin",
+  "instagram",
   "skills",
   "contact",
-  "experience",
-  "education",
-  "leadership",
-  "campus ambassador",
+  "e-summit roorkee",
 ];
 
 export const filterPortfolioData = (query: string): PortfolioItem[] => {
