@@ -109,7 +109,7 @@ const Index = () => {
       <div className="min-h-screen bg-background flex flex-col items-center justify-center">
         <div className="scanlines" />
         <div className="text-center">
-          <p className="font-pixel text-xs text-muted-foreground mb-4 animate-pulse">
+          <p className="font-pixel text-xs text-google-blue mb-4 animate-pulse">
             INITIALIZING SYSTEM...
           </p>
           <div className="flex gap-1 justify-center">
@@ -139,14 +139,14 @@ const Index = () => {
         <button
           onClick={() => { AudioEngine.click(); navigate('/dino'); }}
           onMouseEnter={() => AudioEngine.hover()}
-          className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors"
         >
           GitHub
         </button>
         <button
           onClick={() => { AudioEngine.click(); navigate('/dino'); }}
           onMouseEnter={() => AudioEngine.hover()}
-          className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors"
         >
           Instagram
         </button>
@@ -163,7 +163,7 @@ const Index = () => {
           onMouseEnter={() => AudioEngine.hover()}
           className="p-2 hover:bg-secondary rounded-full"
         >
-          <Grid3X3 className="w-5 h-5 text-muted-foreground" />
+          <Grid3X3 className="w-5 h-5 text-foreground/70" />
         </button>
         <div className="w-8 h-8 rounded-full overflow-hidden border border-border">
           <img src={charchitAvatar} alt="Avatar" className="w-full h-full object-cover" />
@@ -212,7 +212,7 @@ const Index = () => {
           {/* Search Bar */}
           <div className="relative mb-6">
             <div className="flex items-center bg-card border border-border rounded-full px-4 py-3 search-box">
-              <Search className="w-5 h-5 text-muted-foreground mr-3" />
+              <Search className="w-5 h-5 text-foreground/70 mr-3" />
               <input
                 ref={inputRef}
                 type="text"
@@ -222,7 +222,7 @@ const Index = () => {
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search my portfolio..."
-                className="flex-1 bg-transparent outline-none font-code text-foreground placeholder:text-muted-foreground"
+                className="flex-1 bg-transparent outline-none font-code text-foreground placeholder:text-foreground/50"
               />
               <div className="flex items-center gap-1 border-l border-border pl-3 ml-2">
                 <button
@@ -256,7 +256,7 @@ const Index = () => {
                     onMouseEnter={() => AudioEngine.hover()}
                     className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-secondary text-left font-code text-sm"
                   >
-                    <Search className="w-4 h-4 text-muted-foreground" />
+                    <Search className="w-4 h-4 text-foreground/70" />
                     {suggestion}
                   </button>
                 ))}
@@ -284,7 +284,7 @@ const Index = () => {
           </div>
 
           {/* AI Mode Link */}
-          <p className="font-code text-sm text-muted-foreground">
+          <p className="font-code text-sm text-foreground/80">
             Search for projects, skills, or{" "}
             <button
               onClick={() => { AudioEngine.click(); setShowAIChat(true); }}
@@ -301,15 +301,15 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border/50 mt-auto backdrop-blur-sm bg-card/30 relative z-10">
         <div className="px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-          <p className="font-code text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <p className="font-code text-sm text-foreground/70">Roorkee, Uttarakhand, India</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/70">
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
           </div>
         </div>
         <div className="px-6 py-2 border-t border-border/30 flex flex-wrap items-center justify-between gap-2">
-          <p className="font-code text-xs text-muted-foreground/70">
+          <p className="font-code text-xs text-foreground/60">
             This is a personal portfolio styled as a search engine. Not affiliated with Google.
           </p>
           <p className="font-code text-xs text-google-green/80">
