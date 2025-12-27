@@ -286,7 +286,7 @@ const Index = () => {
           </div>
 
           {/* AI Mode Link */}
-          <p className="font-code text-sm text-foreground/80">
+          <p className="font-code text-sm text-foreground">
             Search for projects, skills, or{" "}
             <button
               onClick={() => { AudioEngine.click(); setShowAIChat(true); }}

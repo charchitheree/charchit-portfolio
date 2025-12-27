@@ -204,14 +204,14 @@
 
   /* Retro Button */
   .retro-btn {
-    @apply px-6 py-2 font-code text-sm transition-all duration-200;
+    @apply px-6 py-2 font-code text-sm transition-all duration-200 text-foreground;
     background: hsl(var(--secondary));
     border: 1px solid hsl(var(--border));
   }
 
   .retro-btn:hover {
     background: hsl(var(--card));
-    border-color: hsl(var(--muted-foreground));
+    border-color: hsl(var(--foreground) / 0.5);
   }
 
   /* Result Card */
