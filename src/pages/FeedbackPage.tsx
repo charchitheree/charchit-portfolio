@@ -18,11 +18,20 @@ interface Feedback {
 }
 
 const FEEDBACK_TYPES = [
-  { value: "general" as FeedbackType, label: "General", icon: MessageCircle, color: "google-blue" },
-  { value: "best_part" as FeedbackType, label: "Best Part", icon: Star, color: "google-yellow" },
-  { value: "suggestion" as FeedbackType, label: "Suggestion", icon: Lightbulb, color: "google-green" },
-  { value: "improvement" as FeedbackType, label: "Improvement", icon: Sparkles, color: "google-red" },
+  { value: "general" as FeedbackType, label: "General", icon: MessageCircle, bgClass: "bg-google-blue/20", textClass: "text-google-blue", borderClass: "border-google-blue" },
+  { value: "best_part" as FeedbackType, label: "Best Part", icon: Star, bgClass: "bg-google-yellow/20", textClass: "text-google-yellow", borderClass: "border-google-yellow" },
+  { value: "suggestion" as FeedbackType, label: "Suggestion", icon: Lightbulb, bgClass: "bg-google-green/20", textClass: "text-google-green", borderClass: "border-google-green" },
+  { value: "improvement" as FeedbackType, label: "Improvement", icon: Sparkles, bgClass: "bg-google-red/20", textClass: "text-google-red", borderClass: "border-google-red" },
 ];
+
+const getTypeStyles = (type: FeedbackType) => {
+  const found = FEEDBACK_TYPES.find(t => t.value === type);
+  return {
+    bgClass: found?.bgClass || "bg-google-blue/20",
+    textClass: found?.textClass || "text-google-blue",
+    borderClass: found?.borderClass || "border-google-blue"
+  };
+};
 
 const FeedbackPage = () => {
   const navigate = useNavigate();
@@ -125,10 +134,6 @@ const FeedbackPage = () => {
     return found?.icon || MessageCircle;
   };
 
-  const getTypeColor = (type: FeedbackType) => {
-    const found = FEEDBACK_TYPES.find(t => t.value === type);
-    return found?.color || "google-blue";
-  };
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -159,10 +164,10 @@ const FeedbackPage = () => {
         </div>
       </header>
 
-      <main className="flex-1 container max-w-4xl mx-auto px-4 py-6">
+      <main className="flex-1 container max-w-4xl mx-auto px-4 py-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Submit Form */}
-          <div className="result-card p-4">
+          <div className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-4">
             <h2 className="font-pixel text-xs text-google-blue mb-4">Share Your Voice</h2>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -211,7 +216,7 @@ const FeedbackPage = () => {
                     onClick={() => setFeedbackType(type.value)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors ${
                       feedbackType === type.value 
-                        ? `bg-${type.color}/20 border-${type.color} text-${type.color}` 
+                        ? `${type.bgClass} ${type.borderClass} ${type.textClass}` 
                         : "border-border text-muted-foreground hover:border-border/80"
                     }`}
                   >
@@ -271,14 +276,14 @@ const FeedbackPage = () => {
             {loading ? (
               <div className="space-y-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="result-card p-4">
+                  <div key={i} className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-4">
                     <div className="skeleton h-4 w-24 mb-2 rounded" />
                     <div className="skeleton h-16 w-full rounded" />
                   </div>
                 ))}
               </div>
             ) : feedbacks.length === 0 ? (
-              <div className="result-card p-6 text-center">
+              <div className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-6 text-center">
                 <MessageCircle className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
                 <p className="font-code text-sm text-muted-foreground">No voices yet. Be the first!</p>
               </div>
@@ -286,13 +291,13 @@ const FeedbackPage = () => {
               <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
                 {feedbacks.map((feedback) => {
                   const TypeIcon = getTypeIcon(feedback.feedback_type);
-                  const typeColor = getTypeColor(feedback.feedback_type);
+                  const typeStyles = getTypeStyles(feedback.feedback_type);
                   
                   return (
-                    <div key={feedback.id} className="result-card p-4 animate-fade-in">
+                    <div key={feedback.id} className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-4 animate-fade-in">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <div className={`w-6 h-6 rounded-full bg-${typeColor}/20 flex items-center justify-center`}>
+                          <div className={`w-6 h-6 rounded-full ${typeStyles.bgClass} flex items-center justify-center`}>
                             {feedback.is_anonymous ? (
                               <UserX className="w-3 h-3 text-muted-foreground" />
                             ) : (
@@ -302,7 +307,7 @@ const FeedbackPage = () => {
                           <span className="font-code text-sm text-foreground">
                             {feedback.is_anonymous ? "Anonymous" : feedback.display_name}
                           </span>
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-pixel bg-${typeColor}/20 text-${typeColor}`}>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-pixel ${typeStyles.bgClass} ${typeStyles.textClass}`}>
                             {feedback.feedback_type.replace("_", " ")}
                           </span>
                         </div>
