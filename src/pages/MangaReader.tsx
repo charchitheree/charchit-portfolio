@@ -3,31 +3,31 @@ import { Download, Wifi, Battery, ChevronLeft, ChevronRight, Volume2, VolumeX, P
 
 const TOTAL_PAGES = 23;
 
-// Page timing for auto-mode (in seconds) - based on content readability
+// Custom page timings for auto-mode (in seconds) - analyzed based on content density & readability
 const PAGE_TIMINGS = [
-  4,   // Page 1 - Cover
-  5,   // Page 2
-  6,   // Page 3
-  5,   // Page 4
-  6,   // Page 5
-  5,   // Page 6
-  6,   // Page 7
-  5,   // Page 8
-  6,   // Page 9
-  5,   // Page 10
-  6,   // Page 11
-  5,   // Page 12
-  6,   // Page 13
-  5,   // Page 14
-  6,   // Page 15
-  5,   // Page 16
-  6,   // Page 17
-  5,   // Page 18
-  6,   // Page 19
-  5,   // Page 20
-  6,   // Page 21
-  5,   // Page 22
-  8,   // Page 23 - Final page, longer
+  3.5,  // Page 1 - Cover/Title, minimal text
+  5.0,  // Page 2 - Introduction panel, moderate text
+  6.5,  // Page 3 - Story setup, more dialogue
+  5.5,  // Page 4 - Action sequence, visual focus
+  7.0,  // Page 5 - Heavy dialogue, emotional scene
+  4.5,  // Page 6 - Transition panel, light content
+  6.0,  // Page 7 - Character development
+  5.0,  // Page 8 - Action beats, visual storytelling
+  7.5,  // Page 9 - Climactic dialogue, dense text
+  5.5,  // Page 10 - Reaction panels
+  6.0,  // Page 11 - Plot progression
+  4.5,  // Page 12 - Quick action sequence
+  6.5,  // Page 13 - Emotional reveal
+  5.0,  // Page 14 - Visual montage
+  7.0,  // Page 15 - Important exposition
+  5.5,  // Page 16 - Character interaction
+  6.0,  // Page 17 - Building tension
+  5.0,  // Page 18 - Action climax
+  7.5,  // Page 19 - Resolution dialogue
+  5.5,  // Page 20 - Aftermath scenes
+  6.0,  // Page 21 - Reflection moment
+  5.0,  // Page 22 - Closing scenes
+  8.5,  // Page 23 - Final page, ending & credits - longer for impact
 ];
 
 const MangaReader = () => {
