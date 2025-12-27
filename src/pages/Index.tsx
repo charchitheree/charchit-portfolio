@@ -322,9 +322,12 @@ const Index = () => {
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
           </div>
         </div>
-        <div className="px-6 py-2 border-t border-border/30">
+        <div className="px-6 py-2 border-t border-border/30 flex flex-wrap items-center justify-between gap-2">
           <p className="font-code text-xs text-muted-foreground/70">
             This is a personal portfolio styled as a search engine. Not affiliated with Google.
+          </p>
+          <p className="font-code text-xs text-google-green/80">
+            🎵 Tap on play button for best music experience — suggested by Charchit
           </p>
         </div>
       </footer>
