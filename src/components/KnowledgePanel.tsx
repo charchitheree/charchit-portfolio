@@ -1,23 +1,25 @@
-import { Globe, Share2, Bookmark, Instagram, Linkedin, Twitter, Github, MapPin } from "lucide-react";
+import { Globe, Share2, Bookmark, Instagram, Linkedin, Github, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import charchitPortrait from "@/assets/charchit-portrait.png";
 import charchitEvent from "@/assets/charchit-event.jpg";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
 const KnowledgePanel = () => {
+  const navigate = useNavigate();
+
   const socialLinks = [
-    { icon: Instagram, href: "https://instagram.com/heyimcharchit", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com/in/charchit", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/charchit", label: "Twitter" },
-    { icon: Github, href: "https://github.com/charchit", label: "GitHub" },
+    { icon: Instagram, href: "https://www.instagram.com/heyimcharchit/", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/charchit-sharma-398165287/", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/charchitheree", label: "GitHub" },
   ];
 
-  const tags = ["Data Science", "IIT Madras", "Travel", "Scholar"];
+  const tags = ["Roorkee", "IIT Madras", "Harvard ALP", "Builder", "Data Science"];
 
   const details = [
-    { label: "Born", value: "2004 (Age 21 years)" },
-    { label: "Education", value: "IIT Madras (2028), Harvard ALP (2025)" },
-    { label: "Title", value: "BS Data Science Student" },
-    { label: "Location", value: "India" },
+    { label: "Born", value: "November 8, 2004 (Age 21)" },
+    { label: "Hometown", value: "Roorkee, Uttarakhand, India" },
+    { label: "Education", value: "IIT Madras (BS Data Science, pursuing)" },
+    { label: "Program", value: "Aspire Leadership Program 2025" },
   ];
 
   return (
@@ -27,21 +29,21 @@ const KnowledgePanel = () => {
         <div className="col-span-2 row-span-2 aspect-[4/3] relative overflow-hidden">
           <img
             src={charchitEvent}
-            alt="Charchit at event"
+            alt="Charchit Sharma at a tech event in India"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="aspect-square overflow-hidden">
           <img
             src={charchitPortrait}
-            alt="Charchit portrait"
+            alt="Charchit Sharma portrait - IIT Madras student from Roorkee"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="aspect-square overflow-hidden bg-accent flex items-center justify-center">
           <img
             src={charchitAvatar}
-            alt="Charchit avatar"
+            alt="Charchit Sharma animated avatar"
             className="w-full h-full object-cover"
           />
         </div>
@@ -51,13 +53,19 @@ const KnowledgePanel = () => {
       <div className="p-4">
         {/* Title */}
         <h2 className="text-2xl font-normal text-card-foreground mb-1">Charchit Sharma</h2>
-        <p className="text-sm text-muted-foreground mb-4">Student & Scholar</p>
+        <p className="text-sm text-muted-foreground mb-1">Student, Developer & Aspiring Entrepreneur</p>
+        <p className="text-xs text-muted-foreground flex items-center gap-1 mb-4">
+          <MapPin className="w-3 h-3" /> Roorkee, Uttarakhand
+        </p>
 
         {/* Action Buttons */}
         <div className="flex gap-3 mb-4">
-          <button className="flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-accent hover:bg-accent/80 transition-colors">
+          <button 
+            onClick={() => navigate("/wiki/charchit-sharma")}
+            className="flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-accent hover:bg-accent/80 transition-colors"
+          >
             <Globe className="w-5 h-5 text-primary" />
-            <span className="text-xs text-muted-foreground">Website</span>
+            <span className="text-xs text-muted-foreground">Wikipedia</span>
           </button>
           <button className="flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-accent hover:bg-accent/80 transition-colors">
             <Share2 className="w-5 h-5 text-primary" />
@@ -71,9 +79,9 @@ const KnowledgePanel = () => {
 
         {/* Bio */}
         <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-          Charchit Sharma is an undergraduate student specializing in Data Science. 
-          He currently attends the Indian Institute of Technology, Madras and is an 
-          ALP Scholar at Harvard.
+          A 21-year-old builder from Roorkee with an insatiable hunger to learn. 
+          Pursuing BS in Data Science at IIT Madras. Selected as a 2025 Aspire Leadership Program Scholar 
+          (Harvard faculty-backed). He turns struggles into growth and dreams into reality.
         </p>
 
         {/* Details */}
@@ -102,6 +110,17 @@ const KnowledgePanel = () => {
                 <social.icon className="w-4 h-4 text-muted-foreground" />
               </a>
             ))}
+            <a
+              href="https://x.com/heyimcharchit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-accent flex items-center justify-center hover:bg-accent/80 transition-colors"
+              aria-label="X (Twitter)"
+            >
+              <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
           </div>
         </div>
 

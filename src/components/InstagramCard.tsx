@@ -22,7 +22,7 @@ const InstagramCard = () => {
 
       {/* Title */}
       <a 
-        href="https://www.instagram.com/heyimcharchit"
+        href="https://www.instagram.com/heyimcharchit/"
         target="_blank"
         rel="noopener noreferrer"
         className="text-xl text-primary hover:underline block mb-1"
@@ -32,8 +32,9 @@ const InstagramCard = () => {
 
       {/* Description */}
       <p className="text-sm text-muted-foreground leading-relaxed">
-        <span className="text-card-foreground">8,607 Followers</span> · Student at IIT Madras · Harvard ALP Scholar · 
-        Bio: "Just a bhondu." Follow for travel, tech, and life updates.
+        <span className="text-card-foreground">8,607 Followers</span> · From Roorkee, Uttarakhand · 
+        IIT Madras BS Data Science · ALP Scholar 2025 · 
+        Bio: "Just a bhondu." Follow for tech, travel, and life updates.
       </p>
     </div>
   );

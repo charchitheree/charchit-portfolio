@@ -20,7 +20,8 @@ const SearchResults = () => {
     
     // Check if user is searching for Wikipedia
     const lowerQuery = initialQuery.toLowerCase();
-    if (lowerQuery.includes("wikipedia") && lowerQuery.includes("charchit")) {
+    if ((lowerQuery.includes("wikipedia") || lowerQuery.includes("wiki")) && 
+        (lowerQuery.includes("charchit") || lowerQuery === "wikipedia" || lowerQuery === "wiki")) {
       navigate("/wiki/charchit-sharma");
       return;
     }
@@ -137,7 +138,7 @@ const SearchResults = () => {
       {/* Footer */}
       <footer className="border-t border-border mt-12">
         <div className="px-4 lg:px-6 py-4">
-          <p className="text-sm text-muted-foreground">India</p>
+          <p className="text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
         </div>
         <div className="border-t border-border px-4 lg:px-6 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
           <span>Help</span>

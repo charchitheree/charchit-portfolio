@@ -27,9 +27,8 @@ const Index = () => {
   };
 
   const handleLucky = () => {
-    const randomProject = portfolioData.filter((item) => item.category === "project");
-    const random = randomProject[Math.floor(Math.random() * randomProject.length)];
-    navigate(`/search?q=${encodeURIComponent(random.title)}`);
+    // Go to Wikipedia page directly
+    navigate("/wiki/charchit-sharma");
   };
 
   if (isLoading) {
@@ -62,7 +61,7 @@ const Index = () => {
                 transitionDelay: '1.4s'
               }}
             >
-              Data Science Student • Campus Ambassador
+              From Roorkee, Uttarakhand • IIT Madras • Harvard ALP Scholar
             </p>
           </div>
           
