@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Send, User, UserX, Star, MessageCircle, Lightbulb, Sparkles, Edit2, Trash2, X, Check, LogOut } from "lucide-react";
+import { ArrowLeft, Send, User, UserX, Star, MessageCircle, Lightbulb, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import SpaceBackground from "@/components/SpaceBackground";
-import { User as SupabaseUser } from "@supabase/supabase-js";
 
 type FeedbackType = "general" | "best_part" | "suggestion" | "improvement";
 
@@ -16,7 +15,6 @@ interface Feedback {
   content: string;
   rating: number | null;
   created_at: string;
-  user_id: string | null;
 }
 
 const FEEDBACK_TYPES = [
@@ -37,7 +35,6 @@ const getTypeStyles = (type: FeedbackType) => {
 
 const FeedbackPage = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -49,33 +46,16 @@ const FeedbackPage = () => {
   const [content, setContent] = useState("");
   const [rating, setRating] = useState<number | null>(null);
 
-  // Edit state
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editContent, setEditContent] = useState("");
-
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
   useEffect(() => {
     fetchFeedbacks();
     
-    // Subscribe to realtime updates
     const channel = supabase
       .channel('feedback-changes')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'feedback' },
-        () => {
-          fetchFeedbacks();
+        { event: 'INSERT', schema: 'public', table: 'feedback' },
+        (payload) => {
+          setFeedbacks(prev => [payload.new as Feedback, ...prev]);
         }
       )
       .subscribe();
@@ -103,12 +83,6 @@ const FeedbackPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast.error("Please sign in to submit feedback");
-      navigate("/auth");
-      return;
-    }
-    
     if (!content.trim()) {
       toast.error("Please write something!");
       return;
@@ -120,67 +94,33 @@ const FeedbackPage = () => {
     }
     
     setSubmitting(true);
-    
-    const { error } = await supabase.from("feedback").insert({
+
+    const feedbackData = {
       display_name: isAnonymous ? null : displayName.trim(),
       is_anonymous: isAnonymous,
       feedback_type: feedbackType,
       content: content.trim(),
       rating,
-      user_id: user.id,
-    });
+    };
+    
+    // Save to database
+    const { error } = await supabase.from("feedback").insert(feedbackData);
     
     if (error) {
       toast.error("Failed to submit feedback");
-    } else {
-      toast.success("Thanks for your feedback!");
-      setContent("");
-      setRating(null);
-    }
-    
-    setSubmitting(false);
-  };
-
-  const handleEdit = (feedback: Feedback) => {
-    setEditingId(feedback.id);
-    setEditContent(feedback.content);
-  };
-
-  const handleSaveEdit = async (id: string) => {
-    if (!editContent.trim()) {
-      toast.error("Content cannot be empty");
+      setSubmitting(false);
       return;
     }
 
-    const { error } = await supabase
-      .from("feedback")
-      .update({ content: editContent.trim() })
-      .eq("id", id);
+    // Send email notification (fire and forget)
+    supabase.functions.invoke("notify-feedback", {
+      body: feedbackData,
+    }).catch(err => console.error("Email notification failed:", err));
 
-    if (error) {
-      toast.error("Failed to update feedback");
-    } else {
-      toast.success("Feedback updated!");
-      setEditingId(null);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    const { error } = await supabase
-      .from("feedback")
-      .delete()
-      .eq("id", id);
-
-    if (error) {
-      toast.error("Failed to delete feedback");
-    } else {
-      toast.success("Feedback deleted");
-    }
-  };
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    toast.success("Signed out");
+    toast.success("Thanks for your feedback!");
+    setContent("");
+    setRating(null);
+    setSubmitting(false);
   };
 
   const formatTime = (date: string) => {
@@ -201,8 +141,6 @@ const FeedbackPage = () => {
     const found = FEEDBACK_TYPES.find(t => t.value === type);
     return found?.icon || MessageCircle;
   };
-
-  const isOwner = (feedback: Feedback) => user && feedback.user_id === user.id;
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -229,24 +167,7 @@ const FeedbackPage = () => {
             <span className="text-google-red">s</span>
           </h1>
           
-          <div className="flex items-center gap-2">
-            {user ? (
-              <button
-                onClick={handleSignOut}
-                className="flex items-center gap-1 font-pixel text-xs text-muted-foreground hover:text-google-red transition-colors"
-              >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate("/auth")}
-                className="font-pixel text-xs text-google-blue hover:underline"
-              >
-                Login
-              </button>
-            )}
-          </div>
+          <div className="w-16" />
         </div>
       </header>
 
@@ -255,16 +176,6 @@ const FeedbackPage = () => {
           {/* Submit Form */}
           <div className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-4">
             <h2 className="font-pixel text-xs text-google-blue mb-4">Share Your Voice</h2>
-            
-            {!user && (
-              <div className="mb-4 p-3 bg-google-yellow/10 border border-google-yellow/30 rounded-lg">
-                <p className="font-code text-xs text-google-yellow">
-                  <button onClick={() => navigate("/auth")} className="underline hover:no-underline">
-                    Sign in
-                  </button> to submit and manage your feedback
-                </p>
-              </div>
-            )}
             
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Anonymous Toggle */}
@@ -345,7 +256,7 @@ const FeedbackPage = () => {
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="What's on your mind? Share your thoughts about the portfolio, suggest improvements, or tell me what you liked best..."
+                placeholder="What's on your mind? Share your thoughts about the portfolio..."
                 maxLength={500}
                 rows={4}
                 className="w-full px-4 py-3 bg-secondary border border-border rounded-lg font-code text-sm outline-none focus:border-google-blue transition-colors resize-none"
@@ -355,7 +266,7 @@ const FeedbackPage = () => {
                 <span className="font-code text-xs text-muted-foreground">{content.length}/500</span>
                 <button
                   type="submit"
-                  disabled={submitting || !user}
+                  disabled={submitting}
                   className="flex items-center gap-2 px-4 py-2 bg-google-blue text-white rounded-lg font-code text-sm hover:bg-google-blue/90 transition-colors disabled:opacity-50"
                 >
                   {submitting ? "Sending..." : "Submit"}
@@ -388,8 +299,6 @@ const FeedbackPage = () => {
                 {feedbacks.map((feedback) => {
                   const TypeIcon = getTypeIcon(feedback.feedback_type);
                   const typeStyles = getTypeStyles(feedback.feedback_type);
-                  const canEdit = isOwner(feedback);
-                  const isEditing = editingId === feedback.id;
                   
                   return (
                     <div key={feedback.id} className="backdrop-blur-md bg-card/90 border border-border/50 rounded-lg p-4 animate-fade-in">
@@ -409,29 +318,9 @@ const FeedbackPage = () => {
                             {feedback.feedback_type.replace("_", " ")}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          {canEdit && !isEditing && (
-                            <>
-                              <button
-                                onClick={() => handleEdit(feedback)}
-                                className="p-1 text-muted-foreground hover:text-google-blue transition-colors"
-                                title="Edit"
-                              >
-                                <Edit2 className="w-3 h-3" />
-                              </button>
-                              <button
-                                onClick={() => handleDelete(feedback.id)}
-                                className="p-1 text-muted-foreground hover:text-google-red transition-colors"
-                                title="Delete"
-                              >
-                                <Trash2 className="w-3 h-3" />
-                              </button>
-                            </>
-                          )}
-                          <span className="font-code text-[10px] text-muted-foreground">
-                            {formatTime(feedback.created_at)}
-                          </span>
-                        </div>
+                        <span className="font-code text-[10px] text-muted-foreground">
+                          {formatTime(feedback.created_at)}
+                        </span>
                       </div>
                       
                       {feedback.rating && (
@@ -447,37 +336,9 @@ const FeedbackPage = () => {
                         </div>
                       )}
                       
-                      {isEditing ? (
-                        <div className="space-y-2">
-                          <textarea
-                            value={editContent}
-                            onChange={(e) => setEditContent(e.target.value)}
-                            maxLength={500}
-                            rows={3}
-                            className="w-full px-3 py-2 bg-secondary border border-border rounded-lg font-code text-sm outline-none focus:border-google-blue transition-colors resize-none"
-                          />
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => handleSaveEdit(feedback.id)}
-                              className="flex items-center gap-1 px-3 py-1 bg-google-green text-white rounded font-code text-xs hover:bg-google-green/90"
-                            >
-                              <Check className="w-3 h-3" />
-                              Save
-                            </button>
-                            <button
-                              onClick={() => setEditingId(null)}
-                              className="flex items-center gap-1 px-3 py-1 bg-secondary border border-border rounded font-code text-xs hover:bg-secondary/80"
-                            >
-                              <X className="w-3 h-3" />
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="font-code text-sm text-muted-foreground leading-relaxed">
-                          {feedback.content}
-                        </p>
-                      )}
+                      <p className="font-code text-sm text-muted-foreground leading-relaxed">
+                        {feedback.content}
+                      </p>
                     </div>
                   );
                 })}
