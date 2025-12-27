@@ -10,7 +10,6 @@ import SearchResults from "./pages/SearchResults";
 import WikipediaPage from "./pages/WikipediaPage";
 import MangaReader from "./pages/MangaReader";
 import DinoGame from "./pages/DinoGame";
-import FeedbackPage from "./pages/FeedbackPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,7 +28,6 @@ const App = () => (
             <Route path="/wiki/charchit-sharma" element={<WikipediaPage />} />
             <Route path="/manga" element={<MangaReader />} />
             <Route path="/dino" element={<DinoGame />} />
-            <Route path="/voices" element={<FeedbackPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
