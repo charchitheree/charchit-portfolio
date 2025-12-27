@@ -23,6 +23,7 @@ export type Database = {
           id: string
           is_anonymous: boolean
           rating: number | null
+          user_id: string | null
         }
         Insert: {
           content: string
@@ -32,6 +33,7 @@ export type Database = {
           id?: string
           is_anonymous?: boolean
           rating?: number | null
+          user_id?: string | null
         }
         Update: {
           content?: string
@@ -41,6 +43,7 @@ export type Database = {
           id?: string
           is_anonymous?: boolean
           rating?: number | null
+          user_id?: string | null
         }
         Relationships: []
       }
