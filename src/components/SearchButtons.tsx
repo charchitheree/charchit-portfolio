@@ -5,16 +5,16 @@ interface SearchButtonsProps {
 
 const SearchButtons = ({ onSearch, onLucky }: SearchButtonsProps) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-7">
       <button 
         onClick={onSearch} 
-        className="google-btn hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--google-blue)/0.4)] active:scale-95 transition-all duration-200"
+        className="px-4 py-2 text-sm rounded bg-secondary text-foreground hover:border hover:border-border hover:shadow-sm transition-all"
       >
-        View Projects
+        Charchit Search
       </button>
       <button 
         onClick={onLucky} 
-        className="google-btn hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--google-green)/0.4)] active:scale-95 transition-all duration-200"
+        className="px-4 py-2 text-sm rounded bg-secondary text-foreground hover:border hover:border-border hover:shadow-sm transition-all"
       >
         I'm Feeling Lucky
       </button>

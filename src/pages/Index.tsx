@@ -5,12 +5,14 @@ import SearchBar from "@/components/SearchBar";
 import SearchButtons from "@/components/SearchButtons";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { searchSuggestions, portfolioData } from "@/data/portfolioData";
+import GeminiChat from "@/components/GeminiChat";
+import { searchSuggestions } from "@/data/portfolioData";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [showAIChat, setShowAIChat] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,11 +25,12 @@ const Index = () => {
   }, []);
 
   const handleSearch = () => {
-    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
   };
 
   const handleLucky = () => {
-    // Go to Wikipedia page directly
     navigate("/wiki/charchit-sharma");
   };
 
@@ -69,18 +72,27 @@ const Index = () => {
             value={searchQuery}
             onChange={setSearchQuery}
             onSearch={handleSearch}
+            onAIMode={() => setShowAIChat(true)}
             suggestions={searchSuggestions}
           />
           
           <SearchButtons onSearch={handleSearch} onLucky={handleLucky} />
           
           <p className="mt-8 text-muted-foreground text-sm">
-            Search for projects, skills, or anything about me
+            Search for projects, skills, or{" "}
+            <button 
+              onClick={() => setShowAIChat(true)}
+              className="text-primary hover:underline"
+            >
+              ask AI about Charchit
+            </button>
           </p>
         </div>
       </main>
       
       <Footer />
+      
+      <GeminiChat isOpen={showAIChat} onClose={() => setShowAIChat(false)} />
     </div>
   );
 };
