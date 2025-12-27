@@ -12,19 +12,21 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
   const [showCursor, setShowCursor] = useState(animate);
 
   const sizeClasses = {
-    sm: "text-2xl",
-    md: "text-4xl",
-    lg: "text-6xl md:text-7xl",
+    sm: "text-xl md:text-2xl",
+    md: "text-3xl md:text-4xl",
+    lg: "text-4xl md:text-6xl",
   };
 
   const letters = name.split("");
   const colors = [
-    "text-google-blue",
-    "text-google-red",
-    "text-google-yellow",
-    "text-google-blue",
-    "text-google-green",
-    "text-google-red",
+    "text-retro-cyan",
+    "text-retro-magenta",
+    "text-retro-yellow",
+    "text-retro-cyan",
+    "text-retro-green",
+    "text-retro-magenta",
+    "text-retro-orange",
+    "text-retro-pink",
   ];
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
         }
         return prev + 1;
       });
-    }, 150);
+    }, 120);
 
     return () => clearInterval(timer);
   }, [animate, letters.length]);
@@ -46,7 +48,6 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
   useEffect(() => {
     if (!animate) return;
     
-    // Hide cursor after animation completes + a delay
     if (visibleLetters >= letters.length) {
       const cursorTimer = setTimeout(() => {
         setShowCursor(false);
@@ -56,26 +57,40 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
   }, [animate, visibleLetters, letters.length]);
 
   return (
-    <h1 className={`google-logo-text ${sizeClasses[size]} tracking-tight`}>
-      {letters.map((letter, index) => (
-        <span
-          key={index}
-          className={`${colors[index % colors.length]} inline-block transition-all duration-300`}
-          style={{
-            opacity: index < visibleLetters ? 1 : 0,
-            transform: index < visibleLetters ? "translateY(0) scale(1)" : "translateY(-20px) scale(0.5)",
-          }}
-        >
-          {letter}
-        </span>
-      ))}
-      {showCursor && (
-        <span 
-          className="inline-block w-[3px] md:w-1 h-[0.8em] bg-google-blue ml-1 animate-pulse"
-          style={{ verticalAlign: 'baseline' }}
-        />
-      )}
-    </h1>
+    <div className="relative">
+      {/* Pixel glow effect behind text */}
+      <div className="absolute inset-0 blur-xl opacity-30 pointer-events-none">
+        <h1 className={`font-pixel ${sizeClasses[size]} rainbow-text`}>
+          {name}
+        </h1>
+      </div>
+      
+      <h1 className={`font-pixel ${sizeClasses[size]} tracking-tight relative`}>
+        {letters.map((letter, index) => (
+          <span
+            key={index}
+            className={`${colors[index % colors.length]} inline-block transition-all duration-300 hover:animate-bounce-pixel`}
+            style={{
+              opacity: index < visibleLetters ? 1 : 0,
+              transform: index < visibleLetters ? "translateY(0) scale(1)" : "translateY(-20px) scale(0.5)",
+              textShadow: index < visibleLetters ? '3px 3px 0 hsl(var(--pixel-shadow)), 0 0 20px currentColor' : 'none',
+              transitionDelay: animate ? `${index * 50}ms` : '0ms',
+            }}
+          >
+            {letter}
+          </span>
+        ))}
+        {showCursor && (
+          <span 
+            className="inline-block w-[4px] md:w-[6px] h-[0.8em] bg-retro-cyan ml-1 animate-pulse"
+            style={{ 
+              verticalAlign: 'baseline',
+              boxShadow: '0 0 10px hsl(var(--retro-cyan))',
+            }}
+          />
+        )}
+      </h1>
+    </div>
   );
 };
 
