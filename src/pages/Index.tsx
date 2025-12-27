@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, Mic, Camera, Grid3X3, MessageCircle } from "lucide-react";
 import GeminiChat from "@/components/GeminiChat";
 import SpaceBackground from "@/components/SpaceBackground";
+import ThemeToggle from "@/components/ThemeToggle";
 import { searchSuggestions } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -158,6 +159,7 @@ const Index = () => {
           <MessageCircle className="w-4 h-4" />
           <span className="font-pixel text-[8px] hidden sm:inline">VOICES</span>
         </button>
+        <ThemeToggle />
         <button
           onClick={() => AudioEngine.click()}
           onMouseEnter={() => AudioEngine.hover()}

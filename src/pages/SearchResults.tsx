@@ -7,6 +7,7 @@ import InstagramCard from "@/components/InstagramCard";
 import ImageStrip from "@/components/ImageStrip";
 import AboutSnippet from "@/components/AboutSnippet";
 import SpaceBackground from "@/components/SpaceBackground";
+import ThemeToggle from "@/components/ThemeToggle";
 import { filterPortfolioData, PortfolioItem } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -156,13 +157,13 @@ const SearchResults = () => {
             {/* Search Bar */}
             <div className="flex-1 max-w-2xl">
               <div className="flex items-center bg-card border border-border rounded-full px-4 py-2.5 search-box">
-                <Search className="w-5 h-5 text-muted-foreground mr-3 flex-shrink-0" />
+                <Search className="w-5 h-5 text-foreground/70 mr-3 flex-shrink-0" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={handleType}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent font-code text-foreground outline-none placeholder:text-muted-foreground"
+                  className="flex-1 bg-transparent font-code text-foreground outline-none placeholder:text-foreground/50"
                   placeholder="Search..."
                 />
                 <div className="flex items-center gap-1 border-l border-border pl-3 ml-2">
@@ -186,12 +187,13 @@ const SearchResults = () => {
 
             {/* Right Icons */}
             <div className="hidden lg:flex items-center gap-2">
+              <ThemeToggle />
               <button
                 onClick={() => AudioEngine.click()}
                 onMouseEnter={() => AudioEngine.hover()}
                 className="p-2 hover:bg-secondary rounded-full"
               >
-                <Grid3X3 className="w-5 h-5 text-muted-foreground" />
+                <Grid3X3 className="w-5 h-5 text-foreground/70" />
               </button>
               <div className="w-8 h-8 rounded-full overflow-hidden border border-google-blue">
                 <img src={charchitAvatar} alt="Avatar" className="w-full h-full object-cover" />
@@ -209,7 +211,7 @@ const SearchResults = () => {
                 onClick={() => AudioEngine.click()}
                 onMouseEnter={() => AudioEngine.hover()}
                 className={`px-4 py-2.5 font-code text-sm transition-colors relative ${
-                  i === 0 ? "text-google-blue" : "text-muted-foreground hover:text-foreground"
+                  i === 0 ? "text-google-blue" : "text-foreground/70 hover:text-foreground"
                 }`}
               >
                 {tab}
@@ -268,7 +270,7 @@ const SearchResults = () => {
       {!loading && results.length > 0 && (
         <main className="flex-1 px-4 lg:px-6 py-4">
           {/* Stats Bar */}
-          <p className="font-code text-xs text-muted-foreground mb-4">
+          <p className="font-code text-xs text-foreground/60 mb-4">
             About {results.length.toLocaleString()} results (0.04 seconds)
           </p>
 
@@ -380,8 +382,8 @@ const SearchResults = () => {
       {/* Footer */}
       <footer className="border-t border-border/50 mt-auto backdrop-blur-sm bg-card/30 relative z-10">
         <div className="px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-          <p className="font-code text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <p className="font-code text-sm text-foreground/70">Roorkee, Uttarakhand, India</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/70">
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
             <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
