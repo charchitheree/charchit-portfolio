@@ -2,36 +2,83 @@ import { useNavigate } from "react-router-dom";
 import { Search, Menu, Globe, ChevronRight, ExternalLink } from "lucide-react";
 import charchitPortrait from "@/assets/charchit-portrait.png";
 import charchitEvent from "@/assets/charchit-event.jpg";
-
 const WikipediaPage = () => {
   const navigate = useNavigate();
-
-  const contents = [
-    { id: "early-life", label: "Early life", level: 1 },
-    { id: "the-hunger", label: "The hunger to learn", level: 2 },
-    { id: "education", label: "Education", level: 1 },
-    { id: "iit-madras", label: "IIT Madras", level: 2 },
-    { id: "harvard-alp", label: "Aspire Leadership Program", level: 2 },
-    { id: "journey", label: "The journey", level: 1 },
-    { id: "struggles", label: "Struggles and growth", level: 2 },
-    { id: "builder", label: "The builder within", level: 2 },
-    { id: "entrepreneurship", label: "Entrepreneurship", level: 1 },
-    { id: "interests", label: "Personal life", level: 1 },
-    { id: "philosophy", label: "Philosophy", level: 1 },
-    { id: "see-also", label: "See also", level: 1 },
-    { id: "references", label: "References", level: 1 },
-    { id: "external-links", label: "External links", level: 1 },
-  ];
-
-  const socialLinks = [
-    { name: "GitHub", url: "https://github.com/charchitheree", icon: "github" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/charchit-sharma-398165287/", icon: "linkedin" },
-    { name: "Instagram", url: "https://www.instagram.com/heyimcharchit/", icon: "instagram" },
-    { name: "X (Twitter)", url: "https://x.com/heyimcharchit", icon: "twitter" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-[#101418] text-[#a8afb8]">
+  const contents = [{
+    id: "early-life",
+    label: "Early life",
+    level: 1
+  }, {
+    id: "the-hunger",
+    label: "The hunger to learn",
+    level: 2
+  }, {
+    id: "education",
+    label: "Education",
+    level: 1
+  }, {
+    id: "iit-madras",
+    label: "IIT Madras",
+    level: 2
+  }, {
+    id: "harvard-alp",
+    label: "Aspire Leadership Program",
+    level: 2
+  }, {
+    id: "journey",
+    label: "The journey",
+    level: 1
+  }, {
+    id: "struggles",
+    label: "Struggles and growth",
+    level: 2
+  }, {
+    id: "builder",
+    label: "The builder within",
+    level: 2
+  }, {
+    id: "entrepreneurship",
+    label: "Entrepreneurship",
+    level: 1
+  }, {
+    id: "interests",
+    label: "Personal life",
+    level: 1
+  }, {
+    id: "philosophy",
+    label: "Philosophy",
+    level: 1
+  }, {
+    id: "see-also",
+    label: "See also",
+    level: 1
+  }, {
+    id: "references",
+    label: "References",
+    level: 1
+  }, {
+    id: "external-links",
+    label: "External links",
+    level: 1
+  }];
+  const socialLinks = [{
+    name: "GitHub",
+    url: "https://github.com/charchitheree",
+    icon: "github"
+  }, {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/charchit-sharma-398165287/",
+    icon: "linkedin"
+  }, {
+    name: "Instagram",
+    url: "https://www.instagram.com/heyimcharchit/",
+    icon: "instagram"
+  }, {
+    name: "X (Twitter)",
+    url: "https://x.com/heyimcharchit",
+    icon: "twitter"
+  }];
+  return <div className="min-h-screen bg-[#101418] text-[#a8afb8]">
       {/* Wikipedia Header */}
       <header className="bg-[#101418] border-b border-[#2e3338] sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-4 py-2 flex items-center justify-between">
@@ -49,11 +96,7 @@ const WikipediaPage = () => {
           <div className="flex-1 max-w-xl mx-8">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#72777d]" />
-              <input
-                type="text"
-                placeholder="Search Wikipedia"
-                className="w-full bg-[#27292d] border border-[#3c4043] rounded px-10 py-1.5 text-sm text-[#a8afb8] placeholder:text-[#72777d] focus:outline-none focus:border-[#3584e4]"
-              />
+              <input type="text" placeholder="Search Wikipedia" className="w-full bg-[#27292d] border border-[#3c4043] rounded px-10 py-1.5 text-sm text-[#a8afb8] placeholder:text-[#72777d] focus:outline-none focus:border-[#3584e4]" />
             </div>
           </div>
 
@@ -74,16 +117,10 @@ const WikipediaPage = () => {
           </div>
           <nav className="space-y-1 text-sm">
             <a href="#top" className="block text-[#6b9eff] hover:underline">(Top)</a>
-            {contents.map((item) => (
-              <a 
-                key={item.id} 
-                href={`#${item.id}`}
-                className={`block text-[#6b9eff] hover:underline ${item.level === 2 ? 'pl-4' : ''}`}
-              >
+            {contents.map(item => <a key={item.id} href={`#${item.id}`} className={`block text-[#6b9eff] hover:underline ${item.level === 2 ? 'pl-4' : ''}`}>
                 {item.level === 1 && <ChevronRight className="w-3 h-3 inline mr-1" />}
                 {item.label}
-              </a>
-            ))}
+              </a>)}
           </nav>
         </aside>
 
@@ -116,11 +153,7 @@ const WikipediaPage = () => {
                   <h3 className="text-white font-medium">Charchit Sharma</h3>
                 </div>
                 <div className="p-2">
-                  <img 
-                    src={charchitPortrait} 
-                    alt="Charchit Sharma - Indian student, developer and entrepreneur" 
-                    className="w-full aspect-[4/5] object-cover mb-2"
-                  />
+                  <img src={charchitPortrait} alt="Charchit Sharma - Indian student, developer and entrepreneur" className="w-full aspect-[4/5] object-cover mb-2" />
                   <p className="text-center text-xs text-[#72777d] mb-3">Sharma in 2024</p>
                 </div>
                 <table className="w-full text-xs">
@@ -171,17 +204,9 @@ const WikipediaPage = () => {
                     <tr className="border-t border-[#3c4043]">
                       <th className="text-left p-2 text-[#a8afb8] font-normal align-top">Social</th>
                       <td className="p-2 space-y-1">
-                        {socialLinks.map((link) => (
-                          <a 
-                            key={link.name}
-                            href={link.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="block text-[#6b9eff] hover:underline text-[11px]"
-                          >
+                        {socialLinks.map(link => <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="block text-[#6b9eff] hover:underline text-[11px]">
                             {link.name}
-                          </a>
-                        ))}
+                          </a>)}
                       </td>
                     </tr>
                   </tbody>
@@ -299,12 +324,8 @@ const WikipediaPage = () => {
                 </h2>
 
                 <div className="float-right ml-4 mb-2 w-48">
-                  <img 
-                    src={charchitEvent} 
-                    alt="Charchit Sharma at a technology event" 
-                    className="w-full aspect-square object-cover border border-[#3c4043]"
-                  />
-                  <p className="text-xs text-[#72777d] text-center mt-1">Sharma at a tech event</p>
+                  <img src={charchitEvent} alt="Charchit Sharma at a technology event" className="w-full aspect-square object-cover border border-[#3c4043]" />
+                  <p className="text-xs text-[#72777d] text-center mt-1">Charchit and his friends at the Open Air Theatre, IIT Madras | Summers Paradox 2023</p>
                 </div>
 
                 <h3 id="struggles" className="text-xl font-serif text-white mt-4 mb-2">Struggles and growth</h3>
@@ -579,8 +600,6 @@ const WikipediaPage = () => {
           <p>Text is available under the Creative Commons Attribution-ShareAlike 4.0 License</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default WikipediaPage;
