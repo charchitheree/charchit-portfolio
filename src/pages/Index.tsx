@@ -1,83 +1,124 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import GoogleLogo from "@/components/GoogleLogo";
-import SearchBar from "@/components/SearchBar";
-import SearchButtons from "@/components/SearchButtons";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Search, Mic, Camera, Grid3X3, Gamepad2 } from "lucide-react";
 import GeminiChat from "@/components/GeminiChat";
-import PixelCharacters from "@/components/PixelCharacters";
 import { searchSuggestions } from "@/data/portfolioData";
-import useSoundEffects from "@/hooks/useSoundEffects";
+import charchitAvatar from "@/assets/charchit-avatar.gif";
+
+// Sound Engine
+const AudioEngine = {
+  ctx: null as AudioContext | null,
+  init: () => {
+    if (!AudioEngine.ctx) {
+      AudioEngine.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    if (AudioEngine.ctx.state === 'suspended') {
+      AudioEngine.ctx.resume();
+    }
+  },
+  playTone: (freq: number, type: OscillatorType, duration: number, vol = 0.1) => {
+    if (!AudioEngine.ctx) AudioEngine.init();
+    const ctx = AudioEngine.ctx!;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  },
+  hover: () => AudioEngine.playTone(800, 'square', 0.05, 0.05),
+  click: () => AudioEngine.playTone(400, 'sawtooth', 0.1, 0.08),
+  type: () => AudioEngine.playTone(200 + Math.random() * 50, 'triangle', 0.03, 0.04),
+  success: () => {
+    AudioEngine.playTone(440, 'square', 0.1, 0.08);
+    setTimeout(() => AudioEngine.playTone(880, 'square', 0.2, 0.08), 100);
+  }
+};
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [showAIChat, setShowAIChat] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
-  const { playPowerUp } = useSoundEffects();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    // Init audio on first interaction
+    const handleInteraction = () => {
+      AudioEngine.init();
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+    };
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('keydown', handleInteraction);
+
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
-      playPowerUp();
-      setTimeout(() => setShowContent(true), 100);
-    }, 1500);
+      AudioEngine.success();
+      setTimeout(() => {
+        setShowContent(true);
+        inputRef.current?.focus();
+      }, 100);
+    }, 1200);
 
-    return () => clearTimeout(loadingTimer);
-  }, [playPowerUp]);
+    return () => {
+      clearTimeout(loadingTimer);
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+    };
+  }, []);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
+      AudioEngine.success();
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
 
   const handleLucky = () => {
+    AudioEngine.success();
     navigate("/wiki/charchit-sharma");
   };
 
+  const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setShowSuggestions(true);
+    AudioEngine.type();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+      setShowSuggestions(false);
+    }
+  };
+
+  const filteredSuggestions = searchSuggestions.filter((s) =>
+    s.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden">
-        {/* Background grid */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(hsl(185, 100%, 55%) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(185, 100%, 55%) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
-        />
-        
-        <div className="relative flex flex-col items-center">
-          {/* Loading spinner */}
-          <div className="relative w-16 h-16">
-            <div 
-              className="absolute inset-0 rounded-lg border-2 border-t-neon-cyan border-r-neon-magenta border-b-neon-yellow border-l-neon-green animate-spin"
-            />
-            <div 
-              className="absolute inset-2 rounded border border-primary/30 animate-spin"
-              style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}
-            />
-          </div>
-          
-          <p className="font-gaming text-xs text-muted-foreground mt-6 tracking-widest animate-pulse">
-            INITIALIZING
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+        <div className="scanlines" />
+        <div className="text-center">
+          <p className="font-pixel text-xs text-muted-foreground mb-4 animate-pulse">
+            INITIALIZING SYSTEM...
           </p>
-          
-          {/* Progress bar */}
-          <div className="mt-4 h-1 w-48 bg-secondary rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-neon-cyan via-neon-magenta to-neon-yellow"
-              style={{ 
-                width: '100%',
-                animation: 'loading 1.5s ease-in-out',
-              }} 
-            />
+          <div className="flex gap-1 justify-center">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="w-16 h-2 skeleton rounded"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -85,63 +126,206 @@ const Index = () => {
   }
 
   return (
-    <div className={`min-h-screen bg-background relative flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Background Effects */}
-      <PixelCharacters />
-      
-      <Header />
-      
-      <main className="flex-1 flex flex-col items-center justify-center px-4 pb-32 relative z-10">
-        <div className="w-full max-w-2xl mx-auto text-center">
-          <div className="mb-10">
-            <GoogleLogo name="Charchit" animate />
-            <div 
-              className="flex items-center justify-center gap-2 flex-wrap mt-5 transition-all duration-500"
-              style={{
-                opacity: showContent ? 1 : 0,
-                transform: showContent ? 'translateY(0)' : 'translateY(10px)',
-                transitionDelay: '1.4s'
-              }}
-            >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-sm font-ui">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse" />
-                Roorkee
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 text-neon-magenta text-sm font-ui">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-magenta animate-pulse" />
-                IIT Madras
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-yellow/10 border border-neon-yellow/30 text-neon-yellow text-sm font-ui">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-yellow animate-pulse" />
-                Harvard ALP
+    <div className={`min-h-screen bg-background flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Scanlines Overlay */}
+      <div className="scanlines" />
+
+      {/* Header */}
+      <header className="flex justify-end items-center p-3 px-6 gap-4">
+        <a
+          href="https://github.com/charchitheree"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => AudioEngine.click()}
+          onMouseEnter={() => AudioEngine.hover()}
+          className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://www.instagram.com/heyimcharchit/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => AudioEngine.click()}
+          onMouseEnter={() => AudioEngine.hover()}
+          className="font-code text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Instagram
+        </a>
+        <button
+          onClick={() => { AudioEngine.click(); navigate('/manga'); }}
+          onMouseEnter={() => AudioEngine.hover()}
+          className="flex items-center gap-2 px-3 py-1.5 retro-btn rounded"
+        >
+          <Gamepad2 className="w-4 h-4" />
+          <span className="font-pixel text-[8px] hidden sm:inline">MANGA</span>
+        </button>
+        <button
+          onClick={() => AudioEngine.click()}
+          onMouseEnter={() => AudioEngine.hover()}
+          className="p-2 hover:bg-secondary rounded-full"
+        >
+          <Grid3X3 className="w-5 h-5 text-muted-foreground" />
+        </button>
+        <div className="w-8 h-8 rounded-full overflow-hidden border border-border">
+          <img src={charchitAvatar} alt="Avatar" className="w-full h-full object-cover" />
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col items-center justify-center px-4 pb-32">
+        <div className="w-full max-w-xl mx-auto text-center">
+          
+          {/* Logo */}
+          <div className="mb-8 relative">
+            <h1 className="font-pixel text-4xl md:text-5xl tracking-wide">
+              <span className="text-google-blue text-glow-blue">C</span>
+              <span className="text-google-red text-glow-red">h</span>
+              <span className="text-google-yellow text-glow-yellow">a</span>
+              <span className="text-google-blue text-glow-blue">r</span>
+              <span className="text-google-green text-glow-green">c</span>
+              <span className="text-google-red text-glow-red">h</span>
+              <span className="text-google-yellow text-glow-yellow">i</span>
+              <span className="text-google-blue text-glow-blue">t</span>
+            </h1>
+            <div className="absolute -top-2 -right-4 md:right-16">
+              <span className="font-pixel text-[8px] text-google-green bg-secondary px-2 py-1 border border-border">
+                DEV_MODE
               </span>
             </div>
           </div>
-          
-          <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
-            onSearch={handleSearch}
-            onAIMode={() => setShowAIChat(true)}
-            suggestions={searchSuggestions}
-          />
-          
-          <SearchButtons onSearch={handleSearch} onLucky={handleLucky} />
-          
-          <p className="mt-10 font-ui text-base text-muted-foreground">
+
+          {/* Tagline Badges */}
+          <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
+            <span className="pixel-badge text-google-blue border-google-blue/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-google-blue animate-pulse" />
+              Roorkee
+            </span>
+            <span className="pixel-badge text-google-red border-google-red/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-google-red animate-pulse" />
+              IIT Madras
+            </span>
+            <span className="pixel-badge text-google-yellow border-google-yellow/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-google-yellow animate-pulse" />
+              Harvard ALP
+            </span>
+          </div>
+
+          {/* Search Bar */}
+          <div className="relative mb-6">
+            <div className="flex items-center bg-card border border-border rounded-full px-4 py-3 search-box">
+              <Search className="w-5 h-5 text-muted-foreground mr-3" />
+              <input
+                ref={inputRef}
+                type="text"
+                value={searchQuery}
+                onChange={handleType}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                onKeyDown={handleKeyDown}
+                placeholder="Search my portfolio..."
+                className="flex-1 bg-transparent outline-none font-code text-foreground placeholder:text-muted-foreground"
+              />
+              <div className="flex items-center gap-1 border-l border-border pl-3 ml-2">
+                <button
+                  onClick={() => AudioEngine.click()}
+                  onMouseEnter={() => AudioEngine.hover()}
+                  className="p-2 hover:bg-secondary rounded-full"
+                >
+                  <Mic className="w-5 h-5 text-google-blue" />
+                </button>
+                <button
+                  onClick={() => AudioEngine.click()}
+                  onMouseEnter={() => AudioEngine.hover()}
+                  className="p-2 hover:bg-secondary rounded-full"
+                >
+                  <Camera className="w-5 h-5 text-google-yellow" />
+                </button>
+              </div>
+            </div>
+
+            {/* Suggestions Dropdown */}
+            {showSuggestions && searchQuery && filteredSuggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden">
+                {filteredSuggestions.slice(0, 5).map((suggestion, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setSearchQuery(suggestion);
+                      AudioEngine.click();
+                      handleSearch();
+                    }}
+                    onMouseEnter={() => AudioEngine.hover()}
+                    className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-secondary text-left font-code text-sm"
+                  >
+                    <Search className="w-4 h-4 text-muted-foreground" />
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex justify-center gap-3 mb-6">
+            <button
+              onClick={() => { AudioEngine.click(); handleSearch(); }}
+              onMouseEnter={() => AudioEngine.hover()}
+              className="retro-btn rounded hover:border-google-blue"
+            >
+              Charchit Search
+            </button>
+            <button
+              onClick={() => { AudioEngine.click(); handleLucky(); }}
+              onMouseEnter={() => AudioEngine.hover()}
+              className="retro-btn rounded hover:border-google-green relative overflow-hidden group"
+            >
+              I'm Feeling Lucky
+              <span className="absolute inset-0 bg-google-green/10 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+            </button>
+          </div>
+
+          {/* AI Mode Link */}
+          <p className="font-code text-sm text-muted-foreground">
             Search for projects, skills, or{" "}
-            <button 
-              onClick={() => setShowAIChat(true)}
-              className="text-accent hover:text-accent/80 transition-colors underline underline-offset-4"
+            <button
+              onClick={() => { AudioEngine.click(); setShowAIChat(true); }}
+              onMouseEnter={() => AudioEngine.hover()}
+              className="text-google-blue hover:underline"
             >
               ask AI about Charchit
             </button>
           </p>
+
+          {/* Language Options (Decorative) */}
+          <p className="font-code text-xs text-muted-foreground mt-8">
+            Google offered in:{" "}
+            <span className="text-google-blue hover:underline cursor-pointer">Hinglish</span>{" "}
+            <span className="text-google-red hover:underline cursor-pointer">Binary</span>{" "}
+            <span className="text-google-yellow hover:underline cursor-pointer">Solidity</span>
+          </p>
         </div>
       </main>
-      
-      <Footer />
-      
+
+      {/* Footer */}
+      <footer className="bg-secondary border-t border-border">
+        <div className="px-6 py-3 border-b border-border">
+          <span className="font-code text-sm text-muted-foreground">India</span>
+        </div>
+        <div className="px-6 py-3 flex flex-wrap justify-between text-sm">
+          <div className="flex gap-6">
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">About</span>
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Advertising</span>
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Business</span>
+          </div>
+          <div className="flex gap-6">
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Privacy</span>
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Terms</span>
+            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Settings</span>
+          </div>
+        </div>
+      </footer>
+
       <GeminiChat isOpen={showAIChat} onClose={() => setShowAIChat(false)} />
     </div>
   );
