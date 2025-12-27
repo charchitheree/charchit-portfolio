@@ -95,20 +95,27 @@ const Index = () => {
         <div className="w-full max-w-2xl mx-auto text-center">
           <div className="mb-10">
             <GoogleLogo name="Charchit" animate />
-            <p 
-              className="font-ui text-lg text-muted-foreground mt-6 transition-all duration-500"
+            <div 
+              className="flex items-center justify-center gap-2 flex-wrap mt-5 transition-all duration-500"
               style={{
                 opacity: showContent ? 1 : 0,
                 transform: showContent ? 'translateY(0)' : 'translateY(10px)',
                 transitionDelay: '1.4s'
               }}
             >
-              <span className="text-neon-cyan">Roorkee, Uttarakhand</span>
-              <span className="mx-3 text-border">|</span>
-              <span className="text-neon-magenta">IIT Madras</span>
-              <span className="mx-3 text-border">|</span>
-              <span className="text-neon-yellow">Harvard ALP Scholar</span>
-            </p>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-sm font-ui">
+                <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse" />
+                Roorkee
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-magenta/10 border border-neon-magenta/30 text-neon-magenta text-sm font-ui">
+                <span className="w-1.5 h-1.5 rounded-full bg-neon-magenta animate-pulse" />
+                IIT Madras
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-yellow/10 border border-neon-yellow/30 text-neon-yellow text-sm font-ui">
+                <span className="w-1.5 h-1.5 rounded-full bg-neon-yellow animate-pulse" />
+                Harvard ALP
+              </span>
+            </div>
           </div>
           
           <SearchBar
