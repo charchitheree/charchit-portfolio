@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        pixel: ['"Press Start 2P"', 'cursive'],
-        retro: ['"VT323"', 'monospace'],
+        gaming: ['"Orbitron"', 'sans-serif'],
+        mono: ['"Share Tech Mono"', 'monospace'],
+        ui: ['"Rajdhani"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,15 +58,15 @@ export default {
           yellow: "hsl(var(--google-yellow))",
           green: "hsl(var(--google-green))",
         },
-        retro: {
-          cyan: "hsl(var(--retro-cyan))",
-          magenta: "hsl(var(--retro-magenta))",
-          yellow: "hsl(var(--retro-yellow))",
-          green: "hsl(var(--retro-green))",
-          orange: "hsl(var(--retro-orange))",
-          purple: "hsl(var(--retro-purple))",
-          pink: "hsl(var(--retro-pink))",
-          lime: "hsl(var(--retro-lime))",
+        neon: {
+          cyan: "hsl(var(--neon-cyan))",
+          magenta: "hsl(var(--neon-magenta))",
+          yellow: "hsl(var(--neon-yellow))",
+          green: "hsl(var(--neon-green))",
+          orange: "hsl(var(--neon-orange))",
+          purple: "hsl(var(--neon-purple))",
+          pink: "hsl(var(--neon-pink))",
+          blue: "hsl(var(--neon-blue))",
         },
         pixel: {
           shadow: "hsl(var(--pixel-shadow))",
@@ -87,7 +88,6 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        pixel: "0px",
       },
       keyframes: {
         "accordion-down": {
@@ -102,47 +102,31 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "pixel-bounce": {
+        "neon-pulse": {
+          "0%, 100%": { opacity: "1", boxShadow: "0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)" },
+          "50%": { opacity: "0.9", boxShadow: "0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary) / 0.5)" },
+        },
+        "float": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        "pixel-float": {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "25%": { transform: "translateY(-8px) rotate(2deg)" },
-          "75%": { transform: "translateY(4px) rotate(-2deg)" },
-        },
-        "retro-glow": {
-          "0%, 100%": { boxShadow: "0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary) / 0.5)" },
-          "50%": { boxShadow: "0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary) / 0.5)" },
-        },
-        "color-cycle": {
-          "0%": { color: "hsl(var(--retro-cyan))" },
-          "25%": { color: "hsl(var(--retro-magenta))" },
-          "50%": { color: "hsl(var(--retro-yellow))" },
-          "75%": { color: "hsl(var(--retro-green))" },
-          "100%": { color: "hsl(var(--retro-cyan))" },
-        },
-        "crt-flicker": {
-          "0%, 100%": { opacity: "1" },
-          "92%": { opacity: "1" },
-          "93%": { opacity: "0.8" },
-          "94%": { opacity: "1" },
+        "glow": {
+          "0%, 100%": { filter: "brightness(1)" },
+          "50%": { filter: "brightness(1.2)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.3s ease-out forwards",
-        "pixel-bounce": "pixel-bounce 1s ease-in-out infinite",
-        "pixel-float": "pixel-float 4s ease-in-out infinite",
-        "retro-glow": "retro-glow 2s ease-in-out infinite",
-        "color-cycle": "color-cycle 5s linear infinite",
-        "crt-flicker": "crt-flicker 5s linear infinite",
+        "neon-pulse": "neon-pulse 2s ease-in-out infinite",
+        "float": "float 4s ease-in-out infinite",
+        "glow": "glow 2s ease-in-out infinite",
       },
       boxShadow: {
-        'pixel': '4px 4px 0 hsl(var(--pixel-shadow))',
-        'pixel-lg': '6px 6px 0 hsl(var(--pixel-shadow))',
-        'retro-glow': '0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)',
+        'neon': '0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)',
+        'neon-lg': '0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary) / 0.5)',
+        'neon-accent': '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent) / 0.5)',
       },
     },
   },

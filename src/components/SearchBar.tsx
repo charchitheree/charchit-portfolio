@@ -1,5 +1,6 @@
-import { Search, Mic, Camera, X, Sparkles, Gamepad2 } from "lucide-react";
+import { Search, Mic, Camera, X, Sparkles } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import useSoundEffects from "@/hooks/useSoundEffects";
 
 interface SearchBarProps {
   value: string;
@@ -21,6 +22,7 @@ const SearchBar = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { playClick, playHover, playType } = useSoundEffects();
 
   const filteredSuggestions = suggestions.filter((s) =>
     s.toLowerCase().includes(value.toLowerCase())
@@ -33,9 +35,16 @@ const SearchBar = ({
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+    setShowSuggestions(true);
+    playType();
+  };
+
   const handleSuggestionClick = (suggestion: string) => {
     onChange(suggestion);
     setShowSuggestions(false);
+    playClick();
     onSearch();
   };
 
@@ -50,79 +59,76 @@ const SearchBar = ({
   }, []);
 
   return (
-    <div className="relative w-full max-w-[584px] mx-auto" ref={containerRef}>
+    <div className="relative w-full max-w-[600px] mx-auto" ref={containerRef}>
       <div
-        className={`flex items-center bg-card border-4 border-border rounded-lg px-5 py-3 transition-all duration-200 hover:border-primary hover:shadow-retro-glow ${
+        className={`flex items-center bg-card border-2 border-border rounded-xl px-5 py-3.5 transition-all duration-300 hover:border-primary/50 focus-within:border-primary focus-within:shadow-neon ${
           showSuggestions && filteredSuggestions.length > 0
-            ? "rounded-b-none border-b-2"
+            ? "rounded-b-none border-b"
             : ""
         }`}
-        style={{
-          boxShadow: '4px 4px 0 hsl(var(--pixel-shadow))',
-        }}
       >
-        <Search className="w-5 h-5 text-retro-cyan mr-4 flex-shrink-0" />
+        <Search className="w-5 h-5 text-primary mr-4 flex-shrink-0" />
         <input
           ref={inputRef}
           type="text"
           value={value}
-          onChange={(e) => {
-            onChange(e.target.value);
-            setShowSuggestions(true);
-          }}
+          onChange={handleChange}
           onFocus={() => setShowSuggestions(true)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground font-retro text-xl"
+          className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground font-ui text-lg"
         />
         {value && (
           <>
             <button
-              onClick={() => onChange("")}
-              className="p-1 hover:bg-secondary rounded-lg mr-2 transition-colors"
+              onClick={() => { onChange(""); playClick(); }}
+              onMouseEnter={playHover}
+              className="p-1.5 hover:bg-secondary rounded-lg mr-2 transition-colors"
             >
-              <X className="w-5 h-5 text-muted-foreground hover:text-retro-magenta" />
+              <X className="w-5 h-5 text-muted-foreground hover:text-destructive" />
             </button>
             <div className="w-px h-6 bg-border mr-3" />
           </>
         )}
-        <div className="flex items-center gap-2">
-          <button className="p-2 hover:bg-secondary rounded-lg transition-colors group">
-            <Mic className="w-5 h-5 text-retro-green group-hover:animate-bounce-pixel" />
+        <div className="flex items-center gap-1">
+          <button 
+            onClick={playClick}
+            onMouseEnter={playHover}
+            className="p-2 hover:bg-secondary rounded-lg transition-colors group"
+          >
+            <Mic className="w-5 h-5 text-neon-green group-hover:drop-shadow-[0_0_8px_hsl(var(--neon-green))]" />
           </button>
-          <button className="p-2 hover:bg-secondary rounded-lg transition-colors group">
-            <Camera className="w-5 h-5 text-retro-yellow group-hover:animate-wiggle" />
+          <button 
+            onClick={playClick}
+            onMouseEnter={playHover}
+            className="p-2 hover:bg-secondary rounded-lg transition-colors group"
+          >
+            <Camera className="w-5 h-5 text-neon-yellow group-hover:drop-shadow-[0_0_8px_hsl(var(--neon-yellow))]" />
           </button>
           {onAIMode && (
             <button 
-              onClick={onAIMode}
-              className="flex items-center gap-2 ml-2 px-4 py-2 rounded-lg border-2 border-retro-purple bg-secondary/50 hover:bg-retro-purple/20 transition-all group"
-              style={{
-                boxShadow: '2px 2px 0 hsl(var(--pixel-shadow))',
-              }}
+              onClick={() => { onAIMode(); playClick(); }}
+              onMouseEnter={playHover}
+              className="flex items-center gap-2 ml-2 px-4 py-2 rounded-lg bg-accent/10 border border-accent/50 hover:bg-accent/20 hover:border-accent transition-all group"
             >
-              <Sparkles className="w-4 h-4 text-retro-purple group-hover:animate-sparkle" />
-              <span className="font-pixel text-[8px] text-foreground">AI</span>
+              <Sparkles className="w-4 h-4 text-accent group-hover:drop-shadow-[0_0_8px_hsl(var(--accent))]" />
+              <span className="font-gaming text-[10px] text-foreground tracking-wider">AI</span>
             </button>
           )}
         </div>
       </div>
 
       {showSuggestions && filteredSuggestions.length > 0 && value && (
-        <div 
-          className="absolute w-full bg-card border-4 border-t-0 border-border rounded-b-lg shadow-lg z-10"
-          style={{
-            boxShadow: '4px 4px 0 hsl(var(--pixel-shadow))',
-          }}
-        >
+        <div className="absolute w-full bg-card border-2 border-t-0 border-primary rounded-b-xl shadow-neon z-10 overflow-hidden">
           {filteredSuggestions.slice(0, 5).map((suggestion, index) => (
             <button
               key={index}
               onClick={() => handleSuggestionClick(suggestion)}
-              className="flex items-center w-full px-5 py-3 hover:bg-secondary text-left transition-colors group"
+              onMouseEnter={playHover}
+              className="flex items-center w-full px-5 py-3 hover:bg-primary/10 text-left transition-colors group"
             >
-              <Gamepad2 className="w-4 h-4 text-muted-foreground mr-4 group-hover:text-retro-cyan" />
-              <span className="font-retro text-lg text-foreground">{suggestion}</span>
+              <Search className="w-4 h-4 text-muted-foreground mr-4 group-hover:text-primary" />
+              <span className="font-ui text-base text-foreground">{suggestion}</span>
             </button>
           ))}
         </div>
