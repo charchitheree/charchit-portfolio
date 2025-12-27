@@ -329,7 +329,7 @@ const MangaReader = () => {
             <span className="font-pixel text-[6px] text-gray-400">{isPlaying ? 'PLAYING' : 'POWER'}</span>
           </div>
           <div className="font-pixel text-[8px] text-gray-500 tracking-wider">
-            CHARCHIT-READER 2024
+            CHARCHIT-READER 2025
           </div>
         </div>
 
