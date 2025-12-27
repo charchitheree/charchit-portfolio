@@ -10,6 +10,16 @@ export interface PortfolioItem {
 
 export const portfolioData: PortfolioItem[] = [
   {
+    id: "manga",
+    title: "📖 My Journey - Manga Style",
+    url: "/manga",
+    description:
+      "Experience Charchit's inspiring journey in an immersive manga format! From 'The Boy Who Stayed Quiet' to conquering IIT Madras - read the story that defines his spirit. 23 beautifully illustrated pages.",
+    category: "about",
+    tags: ["Manga", "Story", "Journey", "Inspiration"],
+    keywords: ["manga", "story", "journey", "comic", "read", "book", "my story", "life story", "inspiration", "anime"],
+  },
+  {
     id: "wikipedia",
     title: "Charchit Sharma - Wikipedia",
     url: "/wiki/charchit-sharma",
@@ -122,6 +132,8 @@ export const portfolioData: PortfolioItem[] = [
 ];
 
 export const searchSuggestions = [
+  "manga",
+  "my story",
   "charchit wikipedia",
   "charchit sharma",
   "about charchit",

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SearchResults from "./pages/SearchResults";
 import WikipediaPage from "./pages/WikipediaPage";
+import MangaReader from "./pages/MangaReader";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/wiki/charchit-sharma" element={<WikipediaPage />} />
+          <Route path="/manga" element={<MangaReader />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
