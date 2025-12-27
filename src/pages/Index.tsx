@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, Mic, Camera, Grid3X3, Gamepad2 } from "lucide-react";
 import GeminiChat from "@/components/GeminiChat";
+import SpaceBackground from "@/components/SpaceBackground";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import { searchSuggestions } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -126,7 +128,13 @@ const Index = () => {
   }
 
   return (
-    <div className={`min-h-screen bg-background flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`min-h-screen flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Space Background */}
+      <SpaceBackground />
+      
+      {/* Background Music */}
+      <BackgroundMusic />
+
       {/* Scanlines Overlay */}
       <div className="scanlines" />
 
@@ -178,7 +186,7 @@ const Index = () => {
           
           {/* Logo */}
           <div className="mb-8 relative">
-            <h1 className="font-pixel text-4xl md:text-5xl tracking-wide">
+            <h1 className="font-pixel text-5xl md:text-6xl lg:text-7xl tracking-wide">
               <span className="text-google-blue text-glow-blue">C</span>
               <span className="text-google-red text-glow-red">h</span>
               <span className="text-google-yellow text-glow-yellow">a</span>
@@ -188,8 +196,8 @@ const Index = () => {
               <span className="text-google-yellow text-glow-yellow">i</span>
               <span className="text-google-blue text-glow-blue">t</span>
             </h1>
-            <div className="absolute -top-2 -right-4 md:right-16">
-              <span className="font-pixel text-[8px] text-google-green bg-secondary px-2 py-1 border border-border">
+            <div className="absolute -top-2 -right-4 md:right-8 lg:right-12">
+              <span className="font-pixel text-[8px] text-google-green bg-card/80 backdrop-blur-sm px-2 py-1 border border-google-green/30">
                 DEV_MODE
               </span>
             </div>
@@ -197,16 +205,16 @@ const Index = () => {
 
           {/* Tagline Badges */}
           <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
-            <span className="pixel-badge text-google-blue border-google-blue/30">
+            <span className="pixel-badge text-google-blue border-google-blue/40 bg-google-blue/10">
               <span className="w-1.5 h-1.5 rounded-full bg-google-blue animate-pulse" />
               Roorkee
             </span>
-            <span className="pixel-badge text-google-red border-google-red/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-google-red animate-pulse" />
+            <span className="pixel-badge text-google-green border-google-green/40 bg-google-green/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-google-green animate-pulse" />
               IIT Madras
             </span>
-            <span className="pixel-badge text-google-yellow border-google-yellow/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-google-yellow animate-pulse" />
+            <span className="pixel-badge text-google-blue border-google-blue/40 bg-google-blue/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-google-blue animate-pulse" />
               Harvard ALP
             </span>
           </div>
@@ -301,18 +309,17 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-auto">
-        <div className="px-6 py-4">
+      <footer className="border-t border-border/50 mt-auto backdrop-blur-sm bg-card/30 relative z-10">
+        <div className="px-6 py-4 flex flex-wrap items-center justify-between gap-4">
           <p className="font-code text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
+          </div>
         </div>
-        <div className="border-t border-border px-6 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Send feedback</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
-        </div>
-        <div className="border-t border-border px-6 py-3">
-          <p className="font-code text-xs text-muted-foreground">
+        <div className="px-6 py-2 border-t border-border/30">
+          <p className="font-code text-xs text-muted-foreground/70">
             This is a personal portfolio styled as a search engine. Not affiliated with Google.
           </p>
         </div>

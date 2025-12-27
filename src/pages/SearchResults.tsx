@@ -6,6 +6,8 @@ import PeopleAlsoAsk from "@/components/PeopleAlsoAsk";
 import InstagramCard from "@/components/InstagramCard";
 import ImageStrip from "@/components/ImageStrip";
 import AboutSnippet from "@/components/AboutSnippet";
+import SpaceBackground from "@/components/SpaceBackground";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import { filterPortfolioData, PortfolioItem } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -125,12 +127,18 @@ const SearchResults = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Space Background */}
+      <SpaceBackground />
+      
+      {/* Background Music */}
+      <BackgroundMusic />
+
       {/* Scanlines Overlay */}
       <div className="scanlines" />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-card/80 border-b border-border/50 relative">
         <div className="px-4 lg:px-6 py-3">
           <div className="flex items-center gap-4 lg:gap-6">
             {/* Logo */}
@@ -375,15 +383,14 @@ const SearchResults = () => {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-border mt-auto">
-        <div className="px-6 py-4">
+      <footer className="border-t border-border/50 mt-auto backdrop-blur-sm bg-card/30 relative z-10">
+        <div className="px-6 py-4 flex flex-wrap items-center justify-between gap-4">
           <p className="font-code text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
-        </div>
-        <div className="border-t border-border px-6 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Send feedback</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
-          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
+            <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
+          </div>
         </div>
       </footer>
     </div>

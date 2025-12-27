@@ -5,11 +5,9 @@ const InstagramCard = () => {
     <div className="group">
       {/* URL breadcrumb */}
       <div className="flex items-center gap-2 mb-1">
-        <img 
-          src="https://www.instagram.com/favicon.ico" 
-          alt="Instagram" 
-          className="w-4 h-4 rounded-sm"
-        />
+        <div className="w-4 h-4 rounded-sm bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
+          <span className="text-white text-[8px] font-bold">IG</span>
+        </div>
         <div className="flex items-center text-sm">
           <span className="text-muted-foreground">instagram.com</span>
           <span className="text-muted-foreground mx-1">›</span>
