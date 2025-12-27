@@ -11,6 +11,7 @@ import WikipediaPage from "./pages/WikipediaPage";
 import MangaReader from "./pages/MangaReader";
 import DinoGame from "./pages/DinoGame";
 import FeedbackPage from "./pages/FeedbackPage";
+import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/manga" element={<MangaReader />} />
             <Route path="/dino" element={<DinoGame />} />
             <Route path="/voices" element={<FeedbackPage />} />
+            <Route path="/auth" element={<AuthPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
