@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Mic, Camera, Grid3X3, Gamepad2 } from "lucide-react";
+import { Search, Mic, Camera, Grid3X3, Gamepad2, MessageCircle } from "lucide-react";
 import GeminiChat from "@/components/GeminiChat";
 import SpaceBackground from "@/components/SpaceBackground";
-import BackgroundMusic from "@/components/BackgroundMusic";
 import { searchSuggestions } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -85,7 +84,7 @@ const Index = () => {
 
   const handleLucky = () => {
     AudioEngine.success();
-    navigate("/wiki/charchit-sharma");
+    navigate("/doodle");
   };
 
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,9 +130,6 @@ const Index = () => {
     <div className={`min-h-screen flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
       {/* Space Background */}
       <SpaceBackground />
-      
-      {/* Background Music */}
-      <BackgroundMusic />
 
       {/* Scanlines Overlay */}
       <div className="scanlines" />
@@ -167,6 +163,14 @@ const Index = () => {
         >
           <Gamepad2 className="w-4 h-4" />
           <span className="font-pixel text-[8px] hidden sm:inline">MANGA</span>
+        </button>
+        <button
+          onClick={() => { AudioEngine.click(); navigate('/voices'); }}
+          onMouseEnter={() => AudioEngine.hover()}
+          className="flex items-center gap-2 px-3 py-1.5 retro-btn rounded"
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span className="font-pixel text-[8px] hidden sm:inline">VOICES</span>
         </button>
         <button
           onClick={() => AudioEngine.click()}

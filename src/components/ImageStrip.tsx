@@ -1,3 +1,4 @@
+import { useState } from "react";
 import charchitPortrait from "@/assets/charchit-portrait.png";
 import charchitEvent from "@/assets/charchit-event.jpg";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
@@ -18,6 +19,12 @@ const images = [
 ];
 
 const ImageStrip = () => {
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages(prev => new Set([...prev, index]));
+  };
+
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3">
@@ -27,12 +34,19 @@ const ImageStrip = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-28 h-28 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
+            className="flex-shrink-0 w-28 h-28 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity bg-secondary"
           >
+            {!loadedImages.has(index) && (
+              <div className="w-full h-full skeleton animate-pulse" />
+            )}
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover"
+              loading="lazy"
+              onLoad={() => handleImageLoad(index)}
+              className={`w-full h-full object-cover transition-opacity duration-300 ${
+                loadedImages.has(index) ? 'opacity-100' : 'opacity-0'
+              }`}
             />
           </div>
         ))}

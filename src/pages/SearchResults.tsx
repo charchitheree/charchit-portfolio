@@ -7,7 +7,6 @@ import InstagramCard from "@/components/InstagramCard";
 import ImageStrip from "@/components/ImageStrip";
 import AboutSnippet from "@/components/AboutSnippet";
 import SpaceBackground from "@/components/SpaceBackground";
-import BackgroundMusic from "@/components/BackgroundMusic";
 import { filterPortfolioData, PortfolioItem } from "@/data/portfolioData";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 
@@ -130,9 +129,6 @@ const SearchResults = () => {
     <div className="min-h-screen flex flex-col relative">
       {/* Space Background */}
       <SpaceBackground />
-      
-      {/* Background Music */}
-      <BackgroundMusic />
 
       {/* Scanlines Overlay */}
       <div className="scanlines" />
