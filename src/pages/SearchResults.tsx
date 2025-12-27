@@ -1,6 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Search, Mic, Camera, Grid3X3, Code, Database, Trophy, Cpu, ExternalLink, User } from "lucide-react";
+import { Search, Mic, Camera, Grid3X3, Code, Database, Trophy, Cpu, User } from "lucide-react";
 import KnowledgePanel from "@/components/KnowledgePanel";
 import PeopleAlsoAsk from "@/components/PeopleAlsoAsk";
 import InstagramCard from "@/components/InstagramCard";
@@ -258,8 +258,7 @@ const SearchResults = () => {
               onMouseEnter={() => AudioEngine.hover()}
               className="retro-btn inline-flex items-center gap-2"
             >
-              Search Now
-              <ExternalLink className="w-4 h-4" />
+              Search Now →
             </a>
           </div>
         </main>
@@ -277,14 +276,26 @@ const SearchResults = () => {
             {/* Left Column - Results */}
             <div className="flex-1 lg:max-w-[60%] order-2 lg:order-1">
               <AboutSnippet />
-              <div className="mb-6"><PeopleAlsoAsk /></div>
-              <div className="mb-6"><InstagramCard /></div>
-              <ImageStrip />
+              <div className="mb-4"><PeopleAlsoAsk /></div>
+              <div className="mb-4"><InstagramCard /></div>
+              <div className="mb-4"><ImageStrip /></div>
 
               {/* Result Cards */}
               <div className="space-y-4">
                 {results.slice(0, 5).map((result, index) => {
                   const IconComponent = getResultIcon(result.title);
+                  const isMangaLink = result.url === '/manga' || result.id === 'manga';
+                  
+                  const handleLinkClick = (e: React.MouseEvent) => {
+                    AudioEngine.click();
+                    if (isMangaLink) {
+                      navigate('/manga');
+                    } else {
+                      e.preventDefault();
+                      navigate('/dino');
+                    }
+                  };
+
                   return (
                     <div
                       key={result.id}
@@ -305,27 +316,15 @@ const SearchResults = () => {
                             {result.url}
                           </span>
                         </div>
-                        <a
-                          href={result.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => AudioEngine.click()}
-                          className="ml-auto"
-                        >
-                          <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-google-blue transition-colors" />
-                        </a>
                       </div>
 
                       {/* Title */}
-                      <a
-                        href={result.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => AudioEngine.click()}
-                        className="block font-code text-lg text-google-blue hover:underline mb-1"
+                      <button
+                        onClick={handleLinkClick}
+                        className="block font-code text-lg text-google-blue hover:underline mb-1 text-left"
                       >
                         {result.title}
-                      </a>
+                      </button>
 
                       {/* Description */}
                       <p className="font-code text-sm text-muted-foreground leading-relaxed mb-3">

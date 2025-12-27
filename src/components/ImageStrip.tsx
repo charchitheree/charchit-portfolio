@@ -26,15 +26,15 @@ const ImageStrip = () => {
   };
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center gap-2 mb-3">
+    <div>
+      <div className="flex items-center gap-2 mb-2">
         <p className="text-sm text-muted-foreground">Images for charchit sharma</p>
       </div>
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
         {images.map((image, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-28 h-28 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity bg-secondary"
+            className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity bg-secondary"
           >
             {!loadedImages.has(index) && (
               <div className="w-full h-full skeleton animate-pulse" />
@@ -50,14 +50,12 @@ const ImageStrip = () => {
             />
           </div>
         ))}
-        <div className="flex-shrink-0 w-28 h-28 rounded-lg bg-accent flex items-center justify-center cursor-pointer hover:bg-accent/80 transition-colors">
-          <span className="text-sm text-primary">View all</span>
+        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-accent flex items-center justify-center cursor-pointer hover:bg-accent/80 transition-colors">
+          <span className="text-xs text-primary">View all</span>
         </div>
       </div>
-      {/* Cute shy message */}
-      <p className="text-xs text-muted-foreground/60 mt-2 italic">
-        💫 psst... this user is a bit camera shy, so some pics are AI-enhanced. 
-        the real ones? let's just say they have "character" ✨
+      <p className="text-xs text-muted-foreground/60 mt-1 italic">
+        💫 psst... camera shy user, some pics AI-enhanced ✨
       </p>
     </div>
   );
