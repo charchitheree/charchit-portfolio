@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { Volume2, VolumeX, Play, Pause, GripVertical } from 'lucide-react';
 
 const GlobalMusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [showControls, setShowControls] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [position, setPosition] = useState({ x: 16, y: 16 }); // bottom-right
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const audioRef = useRef<HTMLAudioElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -15,31 +18,56 @@ const GlobalMusicPlayer = () => {
     }
   }, [volume]);
 
-  // Handle first user interaction to enable autoplay
+  // Handle dragging
   useEffect(() => {
-    const handleInteraction = () => {
-      setHasInteracted(true);
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      const newX = window.innerWidth - e.clientX - dragOffset.x;
+      const newY = window.innerHeight - e.clientY - dragOffset.y;
+      
+      // Keep within bounds
+      const maxX = window.innerWidth - (playerRef.current?.offsetWidth || 100);
+      const maxY = window.innerHeight - (playerRef.current?.offsetHeight || 50);
+      
+      setPosition({
+        x: Math.max(8, Math.min(newX, maxX)),
+        y: Math.max(8, Math.min(newY, maxY))
+      });
     };
-    
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('keydown', handleInteraction);
-    
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
     return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, []);
+  }, [isDragging, dragOffset]);
+
+  const handleDragStart = (e: React.MouseEvent) => {
+    if (!playerRef.current) return;
+    const rect = playerRef.current.getBoundingClientRect();
+    setDragOffset({
+      x: window.innerWidth - e.clientX - position.x,
+      y: window.innerHeight - e.clientY - position.y
+    });
+    setIsDragging(true);
+    e.preventDefault();
+  };
 
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play().catch(() => {
-          // Autoplay blocked
-        });
+        audioRef.current.play().catch(() => {});
       }
       setIsPlaying(!isPlaying);
     }
@@ -58,9 +86,11 @@ const GlobalMusicPlayer = () => {
       <audio ref={audioRef} src="/audio/background.mp3" preload="auto" />
       
       <div 
-        className="fixed bottom-4 right-4 z-[100]"
+        ref={playerRef}
+        className={`fixed z-[100] select-none ${isDragging ? 'cursor-grabbing' : ''}`}
+        style={{ right: position.x, bottom: position.y }}
         onMouseEnter={() => setShowControls(true)}
-        onMouseLeave={() => setShowControls(false)}
+        onMouseLeave={() => !isDragging && setShowControls(false)}
       >
         <div className={`
           flex items-center gap-2 px-3 py-2 rounded-full
@@ -68,6 +98,15 @@ const GlobalMusicPlayer = () => {
           transition-all duration-300
           ${showControls ? 'pr-4' : ''}
         `}>
+          {/* Drag handle */}
+          <div 
+            onMouseDown={handleDragStart}
+            className="cursor-grab active:cursor-grabbing p-1 hover:bg-secondary rounded"
+            title="Drag to move"
+          >
+            <GripVertical className="w-3 h-3 text-muted-foreground" />
+          </div>
+
           <button
             onClick={togglePlay}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-secondary transition-colors"
