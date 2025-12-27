@@ -26,24 +26,27 @@ const KnowledgePanel = () => {
     <div className="bg-card rounded-lg border border-border overflow-hidden">
       {/* Image Gallery */}
       <div className="grid grid-cols-3 gap-0.5">
-        <div className="col-span-2 row-span-2 aspect-[4/3] relative overflow-hidden">
+        <div className="col-span-2 row-span-2 aspect-[4/3] relative overflow-hidden bg-secondary">
           <img
             src={charchitEvent}
             alt="Charchit Sharma at a tech event in India"
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="aspect-square overflow-hidden">
+        <div className="aspect-square overflow-hidden bg-secondary">
           <img
             src={charchitPortrait}
             alt="Charchit Sharma portrait - IIT Madras student from Roorkee"
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="aspect-square overflow-hidden bg-accent flex items-center justify-center">
+        <div className="aspect-square overflow-hidden bg-secondary flex items-center justify-center">
           <img
             src={charchitAvatar}
             alt="Charchit Sharma animated avatar"
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
