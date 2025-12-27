@@ -20,7 +20,9 @@ const images = [
 const ImageStrip = () => {
   return (
     <div className="mb-6">
-      <p className="text-sm text-muted-foreground mb-3">Images for charchit sharma</p>
+      <div className="flex items-center gap-2 mb-3">
+        <p className="text-sm text-muted-foreground">Images for charchit sharma</p>
+      </div>
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
         {images.map((image, index) => (
           <div
@@ -38,6 +40,11 @@ const ImageStrip = () => {
           <span className="text-sm text-primary">View all</span>
         </div>
       </div>
+      {/* Cute shy message */}
+      <p className="text-xs text-muted-foreground/60 mt-2 italic">
+        💫 psst... this user is a bit camera shy, so some pics are AI-enhanced. 
+        the real ones? let's just say they have "character" ✨
+      </p>
     </div>
   );
 };
