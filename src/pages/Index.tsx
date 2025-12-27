@@ -287,12 +287,12 @@ const Index = () => {
           </div>
 
           {/* AI Mode Link */}
-          <p className="font-code text-sm text-google-yellow">
+          <p className="font-code text-sm text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
             Search for projects, skills, or{" "}
             <button
               onClick={() => { AudioEngine.click(); setShowAIChat(true); }}
               onMouseEnter={() => AudioEngine.hover()}
-              className="text-google-blue hover:underline font-medium"
+              className="text-google-blue hover:underline font-medium text-glow-blue"
             >
               ask AI about Charchit
             </button>
