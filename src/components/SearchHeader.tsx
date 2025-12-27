@@ -29,17 +29,19 @@ const SearchHeader = ({ query, onQueryChange, onSearch }: SearchHeaderProps) => 
     <header className="sticky top-0 z-10 bg-background border-b border-border">
       <div className="px-4 lg:px-6 py-3">
         <div className="flex items-center gap-4 lg:gap-8">
-          {/* Google Logo */}
+          {/* Logo */}
           <button 
             onClick={() => navigate("/")}
             className="text-2xl font-bold flex-shrink-0"
           >
-            <span className="text-google-blue">G</span>
-            <span className="text-google-red">o</span>
-            <span className="text-google-yellow">o</span>
-            <span className="text-google-blue">g</span>
-            <span className="text-google-green">l</span>
-            <span className="text-google-red">e</span>
+            <span className="text-google-blue">C</span>
+            <span className="text-google-red">h</span>
+            <span className="text-google-yellow">a</span>
+            <span className="text-google-blue">r</span>
+            <span className="text-google-green">c</span>
+            <span className="text-google-red">h</span>
+            <span className="text-google-yellow">i</span>
+            <span className="text-google-blue">t</span>
           </button>
 
           {/* Search Bar */}
