@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        gaming: ['"Orbitron"', 'sans-serif'],
-        mono: ['"Share Tech Mono"', 'monospace'],
+        pixel: ['"Press Start 2P"', 'cursive'],
+        code: ['"Space Mono"', 'monospace'],
         ui: ['"Rajdhani"', 'sans-serif'],
       },
       colors: {
@@ -58,21 +58,6 @@ export default {
           yellow: "hsl(var(--google-yellow))",
           green: "hsl(var(--google-green))",
         },
-        neon: {
-          cyan: "hsl(var(--neon-cyan))",
-          magenta: "hsl(var(--neon-magenta))",
-          yellow: "hsl(var(--neon-yellow))",
-          green: "hsl(var(--neon-green))",
-          orange: "hsl(var(--neon-orange))",
-          purple: "hsl(var(--neon-purple))",
-          pink: "hsl(var(--neon-pink))",
-          blue: "hsl(var(--neon-blue))",
-        },
-        pixel: {
-          shadow: "hsl(var(--pixel-shadow))",
-          highlight: "hsl(var(--pixel-highlight))",
-          glow: "hsl(var(--pixel-glow))",
-        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -102,31 +87,11 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "neon-pulse": {
-          "0%, 100%": { opacity: "1", boxShadow: "0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)" },
-          "50%": { opacity: "0.9", boxShadow: "0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary) / 0.5)" },
-        },
-        "float": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        "glow": {
-          "0%, 100%": { filter: "brightness(1)" },
-          "50%": { filter: "brightness(1.2)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.3s ease-out forwards",
-        "neon-pulse": "neon-pulse 2s ease-in-out infinite",
-        "float": "float 4s ease-in-out infinite",
-        "glow": "glow 2s ease-in-out infinite",
-      },
-      boxShadow: {
-        'neon': '0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)',
-        'neon-lg': '0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary) / 0.5)',
-        'neon-accent': '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--accent) / 0.5)',
       },
     },
   },
