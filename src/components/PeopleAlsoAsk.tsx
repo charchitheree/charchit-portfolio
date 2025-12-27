@@ -30,19 +30,19 @@ const questions = [
 
 const PeopleAlsoAsk = () => {
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
-      <h3 className="px-4 py-3 text-card-foreground text-lg font-normal">People also ask</h3>
+    <div className="bg-card/90 backdrop-blur-md border border-border/50 rounded-lg overflow-hidden shadow-lg">
+      <h3 className="px-4 py-3 text-foreground text-lg font-medium border-b border-border/30">People also ask</h3>
       <Accordion type="single" collapsible className="w-full">
         {questions.map((item, index) => (
           <AccordionItem 
             key={index} 
             value={`item-${index}`}
-            className="border-t border-border"
+            className="border-t border-border/30"
           >
-            <AccordionTrigger className="px-4 py-3 text-sm text-card-foreground hover:no-underline hover:bg-accent/50 [&[data-state=open]>svg]:rotate-180">
+            <AccordionTrigger className="px-4 py-3 text-sm text-foreground hover:no-underline hover:bg-secondary/50 [&[data-state=open]>svg]:rotate-180">
               {item.question}
             </AccordionTrigger>
-            <AccordionContent className="px-4 pb-3 text-sm text-muted-foreground">
+            <AccordionContent className="px-4 pb-3 text-sm text-foreground/70">
               {item.answer}
             </AccordionContent>
           </AccordionItem>
