@@ -388,11 +388,7 @@ const WikipediaPage = () => {
                   Entrepreneurship
                 </h2>
                 
-                <p className="mb-4">
-                  Charchit's entrepreneurial spirit ignited early. His first taste of the startup world came through an 
-                  internship with a venture founded by a brilliant student from IIT Roorkee. That experience planted a seed 
-                  that continues to grow today.
-                </p>
+                <p className="mb-4">But what truly sets him apart is how he leverages AI. He doesn't view artificial intelligence as a threat to developers but as a force multiplier. He uses prompt engineering to accelerate development, generative tools like Suno AI for audio creation, and AI-powered development environments to work at speeds that would have been impossible just years ago. He has explored Web3 and blockchain.</p>
 
                 <p className="mb-4">
                   He is currently nurturing his own startup ideas, including a project codenamed "AuraSync." His vision is 
