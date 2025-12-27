@@ -33,6 +33,14 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      {/* Legal Disclaimer */}
+      <div className="border-t border-border px-6 py-3 text-center">
+        <p className="text-xs text-muted-foreground/70">
+          This is a personal portfolio created for educational & creative purposes. 
+          It is not affiliated with, endorsed by, or connected to Google LLC. 
+          All search results lead to information about Charchit Sharma.
+        </p>
+      </div>
     </footer>
   );
 };
