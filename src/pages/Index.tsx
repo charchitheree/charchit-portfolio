@@ -135,7 +135,7 @@ const Index = () => {
       <div className="scanlines" />
 
       {/* Header */}
-      <header className="flex justify-end items-center p-3 px-6 gap-4">
+      <header className="flex justify-end items-center p-3 px-6 gap-4 backdrop-blur-sm bg-card/50 border-b border-border/30 relative z-10">
         <a
           href="https://github.com/charchitheree"
           target="_blank"
