@@ -1,4 +1,7 @@
 import { Globe, Share2, Bookmark, Instagram, Linkedin, Twitter, Github, MapPin } from "lucide-react";
+import charchitPortrait from "@/assets/charchit-portrait.png";
+import charchitEvent from "@/assets/charchit-event.jpg";
+import charchitAvatar from "@/assets/charchit-avatar.gif";
 
 const KnowledgePanel = () => {
   const socialLinks = [
@@ -23,20 +26,24 @@ const KnowledgePanel = () => {
       <div className="grid grid-cols-3 gap-0.5">
         <div className="col-span-2 row-span-2 aspect-[4/3] relative overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-            alt="Beach scenery"
+            src={charchitEvent}
+            alt="Charchit at event"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="aspect-square overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=300&q=80"
-            alt="Profile"
+            src={charchitPortrait}
+            alt="Charchit portrait"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="aspect-square overflow-hidden bg-accent flex items-center justify-center">
-          <MapPin className="w-8 h-8 text-muted-foreground" />
+          <img
+            src={charchitAvatar}
+            alt="Charchit avatar"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
 
