@@ -59,9 +59,6 @@ const WikipediaPage = () => {
 
           <div className="flex items-center gap-4 text-sm text-[#6b9eff]">
             <button onClick={() => navigate("/")}>← Back to Search</button>
-            <span className="text-[#72777d]">|</span>
-            <span className="cursor-pointer hover:underline">Create account</span>
-            <span className="cursor-pointer hover:underline">Log in</span>
           </div>
         </div>
       </header>
