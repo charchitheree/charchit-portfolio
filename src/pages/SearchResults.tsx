@@ -17,6 +17,14 @@ const SearchResults = () => {
 
   useEffect(() => {
     setSearchQuery(initialQuery);
+    
+    // Check if user is searching for Wikipedia
+    const lowerQuery = initialQuery.toLowerCase();
+    if (lowerQuery.includes("wikipedia") && lowerQuery.includes("charchit")) {
+      navigate("/wiki/charchit-sharma");
+      return;
+    }
+    
     const filteredResults = filterPortfolioData(initialQuery);
     setResults(filteredResults);
 
@@ -30,7 +38,7 @@ const SearchResults = () => {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [initialQuery]);
+  }, [initialQuery, navigate]);
 
   const handleSearch = () => {
     navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
