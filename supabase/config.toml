@@ -2,6 +2,3 @@ project_id = "vhmxjygpmkeszqdfoliz"
 
 [functions.gemini-chat]
 verify_jwt = false
-
-[functions.notify-feedback]
-verify_jwt = false
