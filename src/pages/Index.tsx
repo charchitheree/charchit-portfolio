@@ -297,32 +297,24 @@ const Index = () => {
             </button>
           </p>
 
-          {/* Language Options (Decorative) */}
-          <p className="font-code text-xs text-muted-foreground mt-8">
-            Google offered in:{" "}
-            <span className="text-google-blue hover:underline cursor-pointer">Hinglish</span>{" "}
-            <span className="text-google-red hover:underline cursor-pointer">Binary</span>{" "}
-            <span className="text-google-yellow hover:underline cursor-pointer">Solidity</span>
-          </p>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-secondary border-t border-border">
-        <div className="px-6 py-3 border-b border-border">
-          <span className="font-code text-sm text-muted-foreground">India</span>
+      <footer className="border-t border-border mt-auto">
+        <div className="px-6 py-4">
+          <p className="font-code text-sm text-muted-foreground">Roorkee, Uttarakhand, India</p>
         </div>
-        <div className="px-6 py-3 flex flex-wrap justify-between text-sm">
-          <div className="flex gap-6">
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">About</span>
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Advertising</span>
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Business</span>
-          </div>
-          <div className="flex gap-6">
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Privacy</span>
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Terms</span>
-            <span className="font-code text-muted-foreground hover:text-foreground cursor-pointer">Settings</span>
-          </div>
+        <div className="border-t border-border px-6 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Help</span>
+          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Send feedback</span>
+          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Privacy</span>
+          <span className="font-code hover:text-foreground cursor-pointer transition-colors">Terms</span>
+        </div>
+        <div className="border-t border-border px-6 py-3">
+          <p className="font-code text-xs text-muted-foreground">
+            This is a personal portfolio styled as a search engine. Not affiliated with Google.
+          </p>
         </div>
       </footer>
 
