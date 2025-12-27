@@ -305,14 +305,10 @@ const FeedbackPage = () => {
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <div className={`w-6 h-6 rounded-full ${typeStyles.bgClass} flex items-center justify-center`}>
-                            {feedback.is_anonymous ? (
-                              <UserX className="w-3 h-3 text-muted-foreground" />
-                            ) : (
-                              <User className="w-3 h-3 text-foreground" />
-                            )}
+                            <UserX className="w-3 h-3 text-muted-foreground" />
                           </div>
                           <span className="font-code text-sm text-foreground">
-                            {feedback.is_anonymous ? "Anonymous" : feedback.display_name}
+                            Anonymous
                           </span>
                           <span className={`px-2 py-0.5 rounded text-[10px] font-pixel ${typeStyles.bgClass} ${typeStyles.textClass}`}>
                             {feedback.feedback_type.replace("_", " ")}
