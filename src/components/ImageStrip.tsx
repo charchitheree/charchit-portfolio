@@ -1,19 +1,19 @@
+import charchitPortrait from "@/assets/charchit-portrait.png";
+import charchitEvent from "@/assets/charchit-event.jpg";
+import charchitAvatar from "@/assets/charchit-avatar.gif";
+
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=80",
-    alt: "Mountain landscape",
+    src: charchitPortrait,
+    alt: "Charchit portrait",
   },
   {
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=200&q=80",
-    alt: "Lake reflection",
+    src: charchitEvent,
+    alt: "Charchit at event",
   },
   {
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&q=80",
-    alt: "Forest path",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=200&q=80",
-    alt: "Nature scenery",
+    src: charchitAvatar,
+    alt: "Charchit avatar",
   },
 ];
 
