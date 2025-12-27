@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import GeminiChat from "@/components/GeminiChat";
 import PixelCharacters from "@/components/PixelCharacters";
 import { searchSuggestions } from "@/data/portfolioData";
+import useSoundEffects from "@/hooks/useSoundEffects";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,15 +16,17 @@ const Index = () => {
   const [showContent, setShowContent] = useState(false);
   const [showAIChat, setShowAIChat] = useState(false);
   const navigate = useNavigate();
+  const { playPowerUp } = useSoundEffects();
 
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
+      playPowerUp();
       setTimeout(() => setShowContent(true), 100);
-    }, 1200);
+    }, 1500);
 
     return () => clearTimeout(loadingTimer);
-  }, []);
+  }, [playPowerUp]);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -37,20 +40,45 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center crt-scanlines">
-        <div className="relative">
-          <div className="w-16 h-16 border-4 border-border animate-spin" 
-               style={{ 
-                 borderTopColor: 'hsl(var(--retro-cyan))', 
-                 borderRightColor: 'hsl(var(--retro-magenta))',
-                 borderBottomColor: 'hsl(var(--retro-yellow))',
-                 borderLeftColor: 'hsl(var(--retro-green))',
-               }} />
-        </div>
-        <p className="font-pixel text-xs text-muted-foreground mt-6 animate-pulse">LOADING...</p>
-        <div className="mt-4 h-2 w-48 bg-secondary rounded-none overflow-hidden border-2 border-border">
-          <div className="h-full bg-gradient-to-r from-retro-cyan via-retro-magenta to-retro-yellow animate-[loading_1.2s_ease-in-out]" 
-               style={{ width: '100%' }} />
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden">
+        {/* Background grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(hsl(185, 100%, 55%) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(185, 100%, 55%) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
+        
+        <div className="relative flex flex-col items-center">
+          {/* Loading spinner */}
+          <div className="relative w-16 h-16">
+            <div 
+              className="absolute inset-0 rounded-lg border-2 border-t-neon-cyan border-r-neon-magenta border-b-neon-yellow border-l-neon-green animate-spin"
+            />
+            <div 
+              className="absolute inset-2 rounded border border-primary/30 animate-spin"
+              style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}
+            />
+          </div>
+          
+          <p className="font-gaming text-xs text-muted-foreground mt-6 tracking-widest animate-pulse">
+            INITIALIZING
+          </p>
+          
+          {/* Progress bar */}
+          <div className="mt-4 h-1 w-48 bg-secondary rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-neon-cyan via-neon-magenta to-neon-yellow"
+              style={{ 
+                width: '100%',
+                animation: 'loading 1.5s ease-in-out',
+              }} 
+            />
+          </div>
         </div>
       </div>
     );
@@ -58,24 +86,28 @@ const Index = () => {
 
   return (
     <div className={`min-h-screen bg-background relative flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Pixel Characters Background */}
+      {/* Background Effects */}
       <PixelCharacters />
       
       <Header />
       
       <main className="flex-1 flex flex-col items-center justify-center px-4 pb-32 relative z-10">
         <div className="w-full max-w-2xl mx-auto text-center">
-          <div className="mb-8">
+          <div className="mb-10">
             <GoogleLogo name="Charchit" animate />
             <p 
-              className="font-retro text-xl text-muted-foreground mt-4 transition-all duration-500"
+              className="font-ui text-lg text-muted-foreground mt-6 transition-all duration-500"
               style={{
                 opacity: showContent ? 1 : 0,
                 transform: showContent ? 'translateY(0)' : 'translateY(10px)',
                 transitionDelay: '1.4s'
               }}
             >
-              <span className="text-retro-cyan">★</span> From Roorkee, Uttarakhand <span className="text-retro-magenta">★</span> IIT Madras <span className="text-retro-yellow">★</span> Harvard ALP Scholar <span className="text-retro-green">★</span>
+              <span className="text-neon-cyan">Roorkee, Uttarakhand</span>
+              <span className="mx-3 text-border">|</span>
+              <span className="text-neon-magenta">IIT Madras</span>
+              <span className="mx-3 text-border">|</span>
+              <span className="text-neon-yellow">Harvard ALP Scholar</span>
             </p>
           </div>
           
@@ -89,11 +121,11 @@ const Index = () => {
           
           <SearchButtons onSearch={handleSearch} onLucky={handleLucky} />
           
-          <p className="mt-8 font-retro text-lg text-muted-foreground">
+          <p className="mt-10 font-ui text-base text-muted-foreground">
             Search for projects, skills, or{" "}
             <button 
               onClick={() => setShowAIChat(true)}
-              className="text-retro-purple hover:text-retro-pink transition-colors underline"
+              className="text-accent hover:text-accent/80 transition-colors underline underline-offset-4"
             >
               ask AI about Charchit
             </button>

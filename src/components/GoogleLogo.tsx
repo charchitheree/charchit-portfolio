@@ -12,21 +12,21 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
   const [showCursor, setShowCursor] = useState(animate);
 
   const sizeClasses = {
-    sm: "text-xl md:text-2xl",
-    md: "text-3xl md:text-4xl",
-    lg: "text-4xl md:text-6xl",
+    sm: "text-2xl md:text-3xl",
+    md: "text-4xl md:text-5xl",
+    lg: "text-5xl md:text-7xl",
   };
 
   const letters = name.split("");
   const colors = [
-    "text-retro-cyan",
-    "text-retro-magenta",
-    "text-retro-yellow",
-    "text-retro-cyan",
-    "text-retro-green",
-    "text-retro-magenta",
-    "text-retro-orange",
-    "text-retro-pink",
+    "text-neon-cyan",
+    "text-neon-magenta",
+    "text-neon-yellow",
+    "text-neon-cyan",
+    "text-neon-green",
+    "text-neon-magenta",
+    "text-neon-orange",
+    "text-neon-pink",
   ];
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
         }
         return prev + 1;
       });
-    }, 120);
+    }, 100);
 
     return () => clearInterval(timer);
   }, [animate, letters.length]);
@@ -58,23 +58,18 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
 
   return (
     <div className="relative">
-      {/* Pixel glow effect behind text */}
-      <div className="absolute inset-0 blur-xl opacity-30 pointer-events-none">
-        <h1 className={`font-pixel ${sizeClasses[size]} rainbow-text`}>
-          {name}
-        </h1>
-      </div>
-      
-      <h1 className={`font-pixel ${sizeClasses[size]} tracking-tight relative`}>
+      <h1 className={`font-gaming ${sizeClasses[size]} tracking-wider relative`}>
         {letters.map((letter, index) => (
           <span
             key={index}
-            className={`${colors[index % colors.length]} inline-block transition-all duration-300 hover:animate-bounce-pixel`}
+            className={`${colors[index % colors.length]} inline-block transition-all duration-300 hover:scale-110`}
             style={{
               opacity: index < visibleLetters ? 1 : 0,
-              transform: index < visibleLetters ? "translateY(0) scale(1)" : "translateY(-20px) scale(0.5)",
-              textShadow: index < visibleLetters ? '3px 3px 0 hsl(var(--pixel-shadow)), 0 0 20px currentColor' : 'none',
-              transitionDelay: animate ? `${index * 50}ms` : '0ms',
+              transform: index < visibleLetters ? "translateY(0)" : "translateY(-30px)",
+              textShadow: index < visibleLetters 
+                ? '0 0 10px currentColor, 0 0 30px currentColor, 0 2px 0 hsl(var(--pixel-shadow))' 
+                : 'none',
+              transitionDelay: animate ? `${index * 40}ms` : '0ms',
             }}
           >
             {letter}
@@ -82,14 +77,25 @@ const GoogleLogo = ({ name = "Portfolio", size = "lg", animate = false }: Google
         ))}
         {showCursor && (
           <span 
-            className="inline-block w-[4px] md:w-[6px] h-[0.8em] bg-retro-cyan ml-1 animate-pulse"
+            className="inline-block w-[4px] md:w-[6px] h-[0.75em] bg-neon-cyan ml-2 animate-pulse"
             style={{ 
-              verticalAlign: 'baseline',
-              boxShadow: '0 0 10px hsl(var(--retro-cyan))',
+              verticalAlign: 'middle',
+              boxShadow: '0 0 10px hsl(var(--neon-cyan)), 0 0 20px hsl(var(--neon-cyan))',
             }}
           />
         )}
       </h1>
+      
+      {/* Subtle underline accent */}
+      <div 
+        className="h-0.5 mt-2 mx-auto transition-all duration-1000"
+        style={{
+          width: visibleLetters >= letters.length ? '100%' : '0%',
+          background: 'linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(var(--neon-magenta)), hsl(var(--neon-yellow)))',
+          boxShadow: '0 0 10px hsl(var(--neon-cyan)), 0 0 20px hsl(var(--neon-magenta))',
+          opacity: 0.8,
+        }}
+      />
     </div>
   );
 };
