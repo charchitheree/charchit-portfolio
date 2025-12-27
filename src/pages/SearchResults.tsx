@@ -299,20 +299,20 @@ const SearchResults = () => {
                   return (
                     <div
                       key={result.id}
-                      className="result-card p-4 animate-fade-in"
+                      className="bg-card/90 backdrop-blur-md border border-border/50 rounded-lg p-4 shadow-lg animate-fade-in hover:border-google-blue/50 transition-all"
                       style={{ animationDelay: `${index * 0.1}s` }}
                       onMouseEnter={() => AudioEngine.hover()}
                     >
                       {/* URL Line */}
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-6 h-6 rounded bg-secondary flex items-center justify-center">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-6 h-6 rounded bg-google-blue/20 flex items-center justify-center">
                           <IconComponent className="w-3 h-3 text-google-blue" />
                         </div>
                         <div className="flex flex-col">
                           <span className="font-code text-xs text-foreground">
                             {result.title.split(' - ')[0] || result.title.split('|')[0]}
                           </span>
-                          <span className="font-code text-xs text-muted-foreground truncate max-w-[200px]">
+                          <span className="font-code text-xs text-foreground/50 truncate max-w-[200px]">
                             {result.url}
                           </span>
                         </div>
@@ -321,13 +321,13 @@ const SearchResults = () => {
                       {/* Title */}
                       <button
                         onClick={handleLinkClick}
-                        className="block font-code text-lg text-google-blue hover:underline mb-1 text-left"
+                        className="block font-code text-lg text-google-blue hover:underline mb-2 text-left font-medium"
                       >
                         {result.title}
                       </button>
 
                       {/* Description */}
-                      <p className="font-code text-sm text-muted-foreground leading-relaxed mb-3">
+                      <p className="font-code text-sm text-foreground/70 leading-relaxed mb-3">
                         {result.description}
                       </p>
 
@@ -337,7 +337,7 @@ const SearchResults = () => {
                           {result.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="pixel-badge text-google-green border-google-green/30 text-[10px]"
+                              className="px-2 py-0.5 text-[10px] font-code bg-google-green/20 text-google-green border border-google-green/30 rounded"
                             >
                               {tag}
                             </span>
