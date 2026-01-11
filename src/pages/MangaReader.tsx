@@ -207,10 +207,10 @@ const MangaReader = () => {
     subtitle: "The Beginning",
     pages: "1-23"
   }];
-  return <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f23] flex items-center justify-center p-4 overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f23] flex items-center justify-center p-2 sm:p-4 overflow-hidden">
       
       {/* Disclaimer Banner */}
-      {showDisclaimer && screen === 'READER' && <div className="fixed top-4 left-4 right-4 md:right-auto md:max-w-md z-50 bg-gradient-to-r from-[#9bbc0f]/90 to-[#8bac0f]/90 text-[#0f380f] p-3 rounded-lg shadow-lg backdrop-blur-sm animate-fade-in">
+      {showDisclaimer && screen === 'READER' && <div className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 md:right-auto md:max-w-md z-50 bg-gradient-to-r from-[#9bbc0f]/90 to-[#8bac0f]/90 text-[#0f380f] p-2 sm:p-3 rounded-lg shadow-lg backdrop-blur-sm animate-fade-in">
           <div className="flex items-start gap-2">
             <Headphones className="w-5 h-5 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
@@ -317,7 +317,7 @@ const MangaReader = () => {
       `}</style>
 
       {/* THE CONSOLE DEVICE BODY */}
-      <div className="relative bg-gradient-to-b from-[#3d3d5c] to-[#2d2d44] rounded-[40px] p-6 console-shadow max-w-md w-full">
+      <div className="relative bg-gradient-to-b from-[#3d3d5c] to-[#2d2d44] rounded-[20px] sm:rounded-[40px] p-3 sm:p-6 console-shadow max-w-md w-full">
         
         {/* Top Decorative Strip */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-2 bg-[#1d1d2c] rounded-b-lg" />
@@ -334,7 +334,7 @@ const MangaReader = () => {
         </div>
 
         {/* THE SCREEN */}
-        <div className="relative bg-[#0f380f] rounded-lg p-3 pixel-border screen-glow overflow-hidden">
+        <div className="relative bg-[#0f380f] rounded-lg p-2 sm:p-3 pixel-border screen-glow overflow-hidden">
           
           {/* Screen Overlay Effects */}
           <div className="absolute inset-0 screen-scanline z-20" />
@@ -361,7 +361,7 @@ const MangaReader = () => {
           </div>
 
           {/* SCREEN CONTENT */}
-          <div className="relative z-30 min-h-[380px] flex flex-col">
+          <div className="relative z-30 min-h-[320px] sm:min-h-[380px] flex flex-col">
             
             {/* START SCREEN */}
             {screen === 'START' && <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
@@ -455,7 +455,7 @@ const MangaReader = () => {
                   </div>}
 
                 {/* Page Display */}
-                <div className="relative flex-1 bg-[#0a2a0a] rounded border-2 border-[#306230] overflow-hidden min-h-[260px]">
+                <div className="relative flex-1 bg-[#0a2a0a] rounded border-2 border-[#306230] overflow-hidden min-h-[200px] sm:min-h-[260px]">
                   {/* Page Number Badge */}
                   <div className="absolute top-2 left-2 z-10 font-pixel text-[8px] bg-[#0f380f]/90 text-[#9bbc0f] px-2 py-1 rounded border border-[#306230]">
                     P.{currentPage}/{TOTAL_PAGES}
@@ -551,16 +551,16 @@ const MangaReader = () => {
         </div>
 
         {/* CONSOLE CONTROLS */}
-        <div className="flex items-center justify-between mt-6 px-4">
+        <div className="flex items-center justify-between mt-4 sm:mt-6 px-2 sm:px-4">
           
           {/* D-Pad */}
-          <div className="relative w-24 h-24">
+          <div className="relative w-16 h-16 sm:w-24 sm:h-24">
             {/* Horizontal */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-7 bg-[#1d1d2c] rounded-sm" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 sm:w-20 h-5 sm:h-7 bg-[#1d1d2c] rounded-sm" />
             {/* Vertical */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-20 bg-[#1d1d2c] rounded-sm" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 sm:w-7 h-14 sm:h-20 bg-[#1d1d2c] rounded-sm" />
             {/* Center Circle */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#2d2d44] rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 sm:w-4 h-3 sm:h-4 bg-[#2d2d44] rounded-full" />
             
             {/* Clickable D-Pad Zones */}
             <button onClick={() => {
@@ -568,44 +568,44 @@ const MangaReader = () => {
               setImageLoaded(false);
               setCurrentPage(p => p - 1);
             }
-          }} disabled={isAutoMode} className="absolute top-8 left-0 w-7 h-7 hover:bg-white/10 active:bg-black/30 rounded transition-colors disabled:opacity-50" title="Previous Page" />
+          }} disabled={isAutoMode} className="absolute top-5 sm:top-8 left-0 w-5 sm:w-7 h-5 sm:h-7 hover:bg-white/10 active:bg-black/30 rounded transition-colors disabled:opacity-50" title="Previous Page" />
             <button onClick={() => {
             if (screen === 'READER' && currentPage < TOTAL_PAGES && !isAutoMode) {
               setImageLoaded(false);
               setCurrentPage(p => p + 1);
             }
-          }} disabled={isAutoMode} className="absolute top-8 right-0 w-7 h-7 hover:bg-white/10 active:bg-black/30 rounded transition-colors disabled:opacity-50" title="Next Page" />
+          }} disabled={isAutoMode} className="absolute top-5 sm:top-8 right-0 w-5 sm:w-7 h-5 sm:h-7 hover:bg-white/10 active:bg-black/30 rounded transition-colors disabled:opacity-50" title="Next Page" />
           </div>
 
           {/* A/B Buttons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <div className="flex flex-col items-center gap-1">
               <button onClick={() => {
               if (screen === 'READER') handleExitReader();else if (screen === 'CHAPTERS') setScreen('START');
-            }} className="w-12 h-12 rounded-full bg-gradient-to-b from-red-700 to-red-900 border-b-4 border-red-950 active:border-b-0 active:translate-y-1 shadow-lg hover:from-red-600 hover:to-red-800 transition-all flex items-center justify-center font-pixel text-xs text-red-200">
+            }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-b from-red-700 to-red-900 border-b-4 border-red-950 active:border-b-0 active:translate-y-1 shadow-lg hover:from-red-600 hover:to-red-800 transition-all flex items-center justify-center font-pixel text-[10px] sm:text-xs text-red-200">
                 B
               </button>
-              <span className="font-pixel text-[6px] text-gray-500">BACK</span>
+              <span className="font-pixel text-[5px] sm:text-[6px] text-gray-500">BACK</span>
             </div>
-            <div className="flex flex-col items-center gap-1 -mt-8">
+            <div className="flex flex-col items-center gap-1 -mt-6 sm:-mt-8">
               <button onClick={() => {
               if (screen === 'START') setScreen('CHAPTERS');else if (screen === 'CHAPTERS') {
                 if (downloadedChapters.length > 0) openChapter(true);
               } else if (screen === 'READER') {
                 togglePlayPause();
               }
-            }} className="w-12 h-12 rounded-full bg-gradient-to-b from-red-700 to-red-900 border-b-4 border-red-950 active:border-b-0 active:translate-y-1 shadow-lg hover:from-red-600 hover:to-red-800 transition-all flex items-center justify-center font-pixel text-xs text-red-200">
+            }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-b from-red-700 to-red-900 border-b-4 border-red-950 active:border-b-0 active:translate-y-1 shadow-lg hover:from-red-600 hover:to-red-800 transition-all flex items-center justify-center font-pixel text-[10px] sm:text-xs text-red-200">
                 A
               </button>
-              <span className="font-pixel text-[6px] text-gray-500">{screen === 'READER' ? 'PLAY' : 'SELECT'}</span>
+              <span className="font-pixel text-[5px] sm:text-[6px] text-gray-500">{screen === 'READER' ? 'PLAY' : 'SELECT'}</span>
             </div>
           </div>
 
         </div>
 
         {/* Bottom Speaker Grills */}
-        <div className="flex justify-center gap-1 mt-6">
-          {[...Array(8)].map((_, i) => <div key={i} className="w-1 h-8 bg-[#1d1d2c] rounded-full" />)}
+        <div className="flex justify-center gap-1 mt-4 sm:mt-6">
+          {[...Array(8)].map((_, i) => <div key={i} className="w-1 h-6 sm:h-8 bg-[#1d1d2c] rounded-full" />)}
         </div>
 
         {/* Bottom Label */}
