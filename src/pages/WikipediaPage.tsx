@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Search, Menu, Globe, ChevronRight, ExternalLink } from "lucide-react";
-import charchitPortrait from "@/assets/charchit-portrait.png";
-import charchitEvent from "@/assets/charchit-event.jpg";
+import charchitBlackSuit from "@/assets/charchit-black-suit.jpg";
+import charchitHoodie from "@/assets/charchit-hoodie.jpg";
 const WikipediaPage = () => {
   const navigate = useNavigate();
   const contents = [{
@@ -153,7 +153,7 @@ const WikipediaPage = () => {
                   <h3 className="text-white font-medium">Charchit Sharma</h3>
                 </div>
                 <div className="p-2">
-                  <img src={charchitPortrait} alt="Charchit Sharma - Indian student, developer and entrepreneur" className="w-full aspect-[4/5] object-cover mb-2" />
+                  <img src={charchitBlackSuit} alt="Charchit Sharma - Indian student, developer and entrepreneur" className="w-full aspect-[4/5] object-cover mb-2" />
                   <p className="text-center text-xs text-[#72777d] mb-3">Sharma in 2024</p>
                 </div>
                 <table className="w-full text-xs">
@@ -324,8 +324,8 @@ const WikipediaPage = () => {
                 </h2>
 
                 <div className="float-right ml-4 mb-2 w-48">
-                  <img src={charchitEvent} alt="Charchit Sharma at a technology event" className="w-full aspect-square object-cover border border-[#3c4043]" />
-                  <p className="text-xs text-[#72777d] text-center mt-1">Charchit and his friends at the Open Air Theatre, IIT Madras | Summers Paradox 2023</p>
+                  <img src={charchitHoodie} alt="Charchit Sharma in casual wear" className="w-full aspect-square object-cover border border-[#3c4043]" />
+                  <p className="text-xs text-[#72777d] text-center mt-1">Charchit in 2025</p>
                 </div>
 
                 <h3 id="struggles" className="text-xl font-serif text-white mt-4 mb-2">Struggles and growth</h3>
