@@ -10,6 +10,16 @@ export interface PortfolioItem {
 
 export const portfolioData: PortfolioItem[] = [
   {
+    id: "ai-research",
+    title: "🧠 If AI Got One Human Day - Research",
+    url: "/research/ai-human-day",
+    description:
+      "What 5 AI models taught me about being human. I asked ChatGPT, Claude, Gemini, Grok, and DeepSeek what they'd do with one human day. None asked for power. All wanted simple things: feeling sunlight, tasting food, hugging someone. Read, watch, or explore visually.",
+    category: "project",
+    tags: ["AI Research", "Personal Project", "Philosophy", "Consciousness"],
+    keywords: ["ai", "research", "human", "chatgpt", "claude", "gemini", "grok", "deepseek", "consciousness", "gratitude", "philosophy", "blog"],
+  },
+  {
     id: "manga",
     title: "📖 My Journey - Manga Style",
     url: "/manga",
@@ -132,6 +142,8 @@ export const portfolioData: PortfolioItem[] = [
 ];
 
 export const searchSuggestions = [
+  "ai research",
+  "if ai got one human day",
   "manga",
   "my story",
   "charchit wikipedia",
