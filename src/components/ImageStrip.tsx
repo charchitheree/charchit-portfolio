@@ -1,16 +1,26 @@
 import { useState } from "react";
-import charchitPortrait from "@/assets/charchit-portrait.png";
-import charchitEvent from "@/assets/charchit-event.jpg";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
+import charchitBlackSuit from "@/assets/charchit-black-suit.jpg";
+import charchitLeatherJacket1 from "@/assets/charchit-leather-jacket-1.jpg";
+import charchitLeatherJacket2 from "@/assets/charchit-leather-jacket-2.jpg";
+import charchitHoodie from "@/assets/charchit-hoodie.jpg";
 
 const images = [
   {
-    src: charchitPortrait,
-    alt: "Charchit portrait",
+    src: charchitBlackSuit,
+    alt: "Charchit in black suit",
   },
   {
-    src: charchitEvent,
-    alt: "Charchit at event",
+    src: charchitLeatherJacket1,
+    alt: "Charchit in leather jacket",
+  },
+  {
+    src: charchitLeatherJacket2,
+    alt: "Charchit in leather jacket pose 2",
+  },
+  {
+    src: charchitHoodie,
+    alt: "Charchit in hoodie",
   },
   {
     src: charchitAvatar,
