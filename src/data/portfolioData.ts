@@ -40,6 +40,16 @@ export const portfolioData: PortfolioItem[] = [
     keywords: ["wikipedia", "wiki", "biography", "life", "story", "about", "charchit"],
   },
   {
+    id: "gallery",
+    title: "📸 Photo Gallery - Charchit Sharma",
+    url: "/gallery",
+    description:
+      "Browse through Charchit's photo collection. View fullscreen images with navigation. Street style, formal looks, and more.",
+    category: "about",
+    tags: ["Photos", "Gallery", "Images", "Portfolio"],
+    keywords: ["gallery", "photos", "images", "pictures", "pics", "view all", "fullscreen"],
+  },
+  {
     id: "about",
     title: "Charchit Sharma - The Builder from Roorkee",
     url: "charchit.dev/about",
@@ -153,6 +163,8 @@ export const searchSuggestions = [
   "iit madras",
   "roorkee",
   "harvard alp",
+  "gallery",
+  "photos",
   "github",
   "linkedin",
   "instagram",
