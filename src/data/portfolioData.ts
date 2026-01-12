@@ -12,7 +12,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: "ai-research",
     title: "🧠 If AI Got One Human Day - Research",
-    url: "/research/ai-human-day",
+    url: "https://my-personal-reserach.lovable.app/",
     description:
       "What 5 AI models taught me about being human. I asked ChatGPT, Claude, Gemini, Grok, and DeepSeek what they'd do with one human day. None asked for power. All wanted simple things: feeling sunlight, tasting food, hugging someone. Read, watch, or explore visually.",
     category: "project",
