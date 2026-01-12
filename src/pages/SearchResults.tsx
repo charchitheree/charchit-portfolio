@@ -286,15 +286,23 @@ const SearchResults = () => {
               <div className="space-y-4">
                 {results.slice(0, 5).map((result, index) => {
                   const IconComponent = getResultIcon(result.title);
-                  const isMangaLink = result.url === '/manga' || result.id === 'manga';
+                  
+                  // Check if it's an internal route
+                  const internalRoutes = ['/manga', '/wiki/charchit-sharma', '/research/ai-human-day', '/dino'];
+                  const isInternalRoute = result.url.startsWith('/') && internalRoutes.includes(result.url);
+                  const isExternalLink = result.url.startsWith('http');
                   
                   const handleLinkClick = (e: React.MouseEvent) => {
+                    e.preventDefault();
                     AudioEngine.click();
-                    if (isMangaLink) {
-                      navigate('/manga');
+                    
+                    if (isInternalRoute) {
+                      navigate(result.url);
+                    } else if (isExternalLink) {
+                      window.open(result.url, '_blank', 'noopener,noreferrer');
                     } else {
-                      e.preventDefault();
-                      navigate('/dino');
+                      // Show error for non-linked items
+                      navigate('/404');
                     }
                   };
 
@@ -326,6 +334,9 @@ const SearchResults = () => {
                         className="block font-code text-lg text-google-blue hover:underline mb-2 text-left font-medium"
                       >
                         {result.title}
+                        {!isInternalRoute && !isExternalLink && (
+                          <span className="ml-2 text-xs text-foreground/40">(coming soon)</span>
+                        )}
                       </button>
 
                       {/* Description */}

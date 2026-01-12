@@ -250,10 +250,10 @@ const Index = () => {
                 {filteredSuggestions.slice(0, 5).map((suggestion, i) => (
                   <button
                     key={i}
-                    onClick={() => {
-                      setSearchQuery(suggestion);
+                    onMouseDown={(e) => {
+                      e.preventDefault();
                       AudioEngine.click();
-                      handleSearch();
+                      navigate(`/search?q=${encodeURIComponent(suggestion)}`);
                     }}
                     onMouseEnter={() => AudioEngine.hover()}
                     className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-secondary text-left font-code text-sm"
