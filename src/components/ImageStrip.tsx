@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import charchitAvatar from "@/assets/charchit-avatar.gif";
 import charchitBlackSuit from "@/assets/charchit-black-suit.jpg";
 import charchitLeatherJacket1 from "@/assets/charchit-leather-jacket-1.jpg";
@@ -29,6 +30,7 @@ const images = [
 ];
 
 const ImageStrip = () => {
+  const navigate = useNavigate();
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
   const handleImageLoad = (index: number) => {
@@ -44,6 +46,7 @@ const ImageStrip = () => {
         {images.map((image, index) => (
           <div
             key={index}
+            onClick={() => navigate("/gallery")}
             className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity bg-secondary border border-border/30"
           >
             {!loadedImages.has(index) && (
@@ -60,7 +63,10 @@ const ImageStrip = () => {
             />
           </div>
         ))}
-        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-secondary/50 border border-border/30 flex items-center justify-center cursor-pointer hover:bg-secondary transition-colors">
+        <div 
+          onClick={() => navigate("/gallery")}
+          className="flex-shrink-0 w-20 h-20 rounded-lg bg-secondary/50 border border-border/30 flex items-center justify-center cursor-pointer hover:bg-secondary transition-colors"
+        >
           <span className="text-xs text-google-blue font-medium">View all</span>
         </div>
       </div>
