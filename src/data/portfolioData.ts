@@ -10,6 +10,16 @@ export interface PortfolioItem {
 
 export const portfolioData: PortfolioItem[] = [
   {
+    id: "portfolio-work",
+    title: "💼 Portfolio Work - Charchit Sharma",
+    url: "/portfolio",
+    description:
+      "Explore all my projects! From bakery websites to AI research - see the complete collection of work I've built. This portfolio itself is a project with embedded sub-projects like Manga, Wikipedia, and AI Research.",
+    category: "project",
+    tags: ["Portfolio", "Projects", "Web Development", "Showcase"],
+    keywords: ["portfolio", "projects", "work", "showcase", "client work", "websites", "all projects"],
+  },
+  {
     id: "ai-research",
     title: "🧠 If AI Got One Human Day - Research",
     url: "https://my-personal-reserach.lovable.app/",
@@ -152,6 +162,8 @@ export const portfolioData: PortfolioItem[] = [
 ];
 
 export const searchSuggestions = [
+  "portfolio",
+  "portfolio work",
   "ai research",
   "if ai got one human day",
   "manga",

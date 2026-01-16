@@ -12,6 +12,7 @@ import MangaReader from "./pages/MangaReader";
 import DinoGame from "./pages/DinoGame";
 import ResearchBlog from "./pages/ResearchBlog";
 import PhotoGallery from "./pages/PhotoGallery";
+import PortfolioWork from "./pages/PortfolioWork";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/dino" element={<DinoGame />} />
             <Route path="/research/ai-human-day" element={<ResearchBlog />} />
             <Route path="/gallery" element={<PhotoGallery />} />
+            <Route path="/portfolio" element={<PortfolioWork />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
