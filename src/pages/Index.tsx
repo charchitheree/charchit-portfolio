@@ -40,7 +40,6 @@ const AudioEngine = {
     setTimeout(() => AudioEngine.playTone(880, 'square', 0.2, 0.08), 100);
   }
 };
-
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +48,6 @@ const Index = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     // Init audio on first interaction
     const handleInteraction = () => {
@@ -59,7 +57,6 @@ const Index = () => {
     };
     window.addEventListener('click', handleInteraction);
     window.addEventListener('keydown', handleInteraction);
-
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       AudioEngine.success();
@@ -68,67 +65,50 @@ const Index = () => {
         inputRef.current?.focus();
       }, 100);
     }, 1200);
-
     return () => {
       clearTimeout(loadingTimer);
       window.removeEventListener('click', handleInteraction);
       window.removeEventListener('keydown', handleInteraction);
     };
   }, []);
-
   const handleSearch = () => {
     if (searchQuery.trim()) {
       AudioEngine.success();
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
-
   const handleLucky = () => {
     AudioEngine.success();
     navigate("/dino");
   };
-
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setShowSuggestions(true);
     AudioEngine.type();
   };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSearch();
       setShowSuggestions(false);
     }
   };
-
-  const filteredSuggestions = searchSuggestions.filter((s) =>
-    s.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+  const filteredSuggestions = searchSuggestions.filter(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+    return <div className="min-h-screen bg-background flex flex-col items-center justify-center">
         <div className="scanlines" />
         <div className="text-center">
           <p className="font-pixel text-xs text-google-blue mb-4 animate-pulse">
             INITIALIZING SYSTEM...
           </p>
           <div className="flex gap-1 justify-center">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-16 h-2 skeleton rounded"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
-            ))}
+            {[1, 2, 3].map(i => <div key={i} className="w-16 h-2 skeleton rounded" style={{
+            animationDelay: `${i * 0.2}s`
+          }} />)}
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className={`min-h-screen flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+  return <div className={`min-h-screen flex flex-col transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
       {/* Space Background */}
       <SpaceBackground />
 
@@ -137,43 +117,27 @@ const Index = () => {
 
       {/* Header */}
       <header className="flex justify-end items-center p-3 px-6 gap-4 backdrop-blur-sm bg-card/50 border-b border-border/30 relative z-10">
-        <button
-          onClick={() => { AudioEngine.click(); navigate('/portfolio'); }}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors"
-        >
+        <button onClick={() => {
+        AudioEngine.click();
+        navigate('/portfolio');
+      }} onMouseEnter={() => AudioEngine.hover()} className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors">
           Portfolio Work
         </button>
-        <button
-          onClick={() => { AudioEngine.click(); navigate('/dino'); }}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors"
-        >
+        <button onClick={() => {
+        AudioEngine.click();
+        navigate('/dino');
+      }} onMouseEnter={() => AudioEngine.hover()} className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors">
           GitHub
         </button>
-        <button
-          onClick={() => { AudioEngine.click(); navigate('/dino'); }}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors"
-        >
+        <button onClick={() => {
+        AudioEngine.click();
+        navigate('/dino');
+      }} onMouseEnter={() => AudioEngine.hover()} className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors">
           Instagram
         </button>
-        <button
-          onClick={() => { AudioEngine.click(); navigate('/voices'); }}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="flex items-center gap-2 px-3 py-1.5 retro-btn rounded"
-        >
-          <MessageCircle className="w-4 h-4" />
-          <span className="font-pixel text-[8px] hidden sm:inline">VOICES</span>
-        </button>
+        
         <ThemeToggle />
-        <button
-          onClick={() => AudioEngine.click()}
-          onMouseEnter={() => AudioEngine.hover()}
-          className="p-2 hover:bg-secondary rounded-full"
-        >
-          <Grid3X3 className="w-5 h-5 text-foreground/70" />
-        </button>
+        
         <div className="w-8 h-8 rounded-full overflow-hidden border border-border">
           <img src={charchitAvatar} alt="Avatar" className="w-full h-full object-cover" />
         </div>
@@ -222,72 +186,43 @@ const Index = () => {
           <div className="relative mb-6">
             <div className="flex items-center bg-card border border-border rounded-full px-4 py-3 search-box">
               <Search className="w-5 h-5 text-foreground/70 mr-3" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={searchQuery}
-                onChange={handleType}
-                onFocus={() => setShowSuggestions(true)}
-                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                onKeyDown={handleKeyDown}
-                placeholder="Search my portfolio..."
-                className="flex-1 bg-transparent outline-none font-code text-foreground placeholder:text-foreground/50"
-              />
+              <input ref={inputRef} type="text" value={searchQuery} onChange={handleType} onFocus={() => setShowSuggestions(true)} onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} onKeyDown={handleKeyDown} placeholder="Search my portfolio..." className="flex-1 bg-transparent outline-none font-code text-foreground placeholder:text-foreground/50" />
               <div className="flex items-center gap-1 border-l border-border pl-3 ml-2">
-                <button
-                  onClick={() => AudioEngine.click()}
-                  onMouseEnter={() => AudioEngine.hover()}
-                  className="p-2 hover:bg-secondary rounded-full"
-                >
+                <button onClick={() => AudioEngine.click()} onMouseEnter={() => AudioEngine.hover()} className="p-2 hover:bg-secondary rounded-full">
                   <Mic className="w-5 h-5 text-google-blue" />
                 </button>
-                <button
-                  onClick={() => AudioEngine.click()}
-                  onMouseEnter={() => AudioEngine.hover()}
-                  className="p-2 hover:bg-secondary rounded-full"
-                >
+                <button onClick={() => AudioEngine.click()} onMouseEnter={() => AudioEngine.hover()} className="p-2 hover:bg-secondary rounded-full">
                   <Camera className="w-5 h-5 text-google-yellow" />
                 </button>
               </div>
             </div>
 
             {/* Suggestions Dropdown */}
-            {showSuggestions && searchQuery && filteredSuggestions.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden">
-                {filteredSuggestions.slice(0, 5).map((suggestion, i) => (
-                  <button
-                    key={i}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      AudioEngine.click();
-                      navigate(`/search?q=${encodeURIComponent(suggestion)}`);
-                    }}
-                    onMouseEnter={() => AudioEngine.hover()}
-                    className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-secondary text-left font-code text-sm"
-                  >
+            {showSuggestions && searchQuery && filteredSuggestions.length > 0 && <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden">
+                {filteredSuggestions.slice(0, 5).map((suggestion, i) => <button key={i} onMouseDown={e => {
+              e.preventDefault();
+              AudioEngine.click();
+              navigate(`/search?q=${encodeURIComponent(suggestion)}`);
+            }} onMouseEnter={() => AudioEngine.hover()} className="flex items-center gap-3 w-full px-4 py-2.5 hover:bg-secondary text-left font-code text-sm">
                     <Search className="w-4 h-4 text-foreground/70" />
                     {suggestion}
-                  </button>
-                ))}
-              </div>
-            )}
+                  </button>)}
+              </div>}
           </div>
 
           {/* Buttons */}
           <div className="flex justify-center gap-3 mb-6">
-            <button
-              onClick={() => { AudioEngine.click(); handleSearch(); }}
-              onMouseEnter={() => AudioEngine.hover()}
-              className="retro-btn rounded hover:border-google-blue relative overflow-hidden group"
-            >
+            <button onClick={() => {
+            AudioEngine.click();
+            handleSearch();
+          }} onMouseEnter={() => AudioEngine.hover()} className="retro-btn rounded hover:border-google-blue relative overflow-hidden group">
               Charchit Search
               <span className="absolute inset-0 bg-google-blue/10 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </button>
-            <button
-              onClick={() => { AudioEngine.click(); handleLucky(); }}
-              onMouseEnter={() => AudioEngine.hover()}
-              className="retro-btn rounded hover:border-google-green relative overflow-hidden group"
-            >
+            <button onClick={() => {
+            AudioEngine.click();
+            handleLucky();
+          }} onMouseEnter={() => AudioEngine.hover()} className="retro-btn rounded hover:border-google-green relative overflow-hidden group">
               I'm Feeling Lucky
               <span className="absolute inset-0 bg-google-green/10 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </button>
@@ -296,11 +231,10 @@ const Index = () => {
           {/* AI Mode Link */}
           <p className="font-code text-sm text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
             Search for projects, skills, or{" "}
-            <button
-              onClick={() => { AudioEngine.click(); setShowAIChat(true); }}
-              onMouseEnter={() => AudioEngine.hover()}
-              className="text-google-blue hover:underline font-medium text-glow-blue"
-            >
+            <button onClick={() => {
+            AudioEngine.click();
+            setShowAIChat(true);
+          }} onMouseEnter={() => AudioEngine.hover()} className="text-google-blue hover:underline font-medium text-glow-blue">
               ask AI about Charchit
             </button>
           </p>
@@ -329,8 +263,6 @@ const Index = () => {
       </footer>
 
       <GeminiChat isOpen={showAIChat} onClose={() => setShowAIChat(false)} />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
