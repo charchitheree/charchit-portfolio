@@ -288,7 +288,7 @@ const SearchResults = () => {
                   const IconComponent = getResultIcon(result.title);
                   
                   // Check if it's an internal route
-                  const internalRoutes = ['/manga', '/wiki/charchit-sharma', '/research/ai-human-day', '/dino'];
+                  const internalRoutes = ['/manga', '/wiki/charchit-sharma', '/research/ai-human-day', '/gallery', '/portfolio', '/dino'];
                   const isInternalRoute = result.url.startsWith('/') && internalRoutes.includes(result.url);
                   const isExternalLink = result.url.startsWith('http');
                   
