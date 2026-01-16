@@ -117,12 +117,7 @@ const Index = () => {
 
       {/* Header */}
       <header className="flex justify-end items-center p-3 px-6 gap-4 backdrop-blur-sm bg-card/50 border-b border-border/30 relative z-10">
-        <button onClick={() => {
-        AudioEngine.click();
-        navigate('/portfolio');
-      }} onMouseEnter={() => AudioEngine.hover()} className="font-code text-sm text-foreground/80 hover:text-foreground transition-colors">
-          Portfolio Work
-        </button>
+        
         <button onClick={() => {
         AudioEngine.click();
         navigate('/dino');
